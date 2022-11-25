@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Flotte verwalten</h1>
+{% endblock %}
+
+{% block content %}
+<br>
+<h2>Aktuelle Züge</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Zugnummer</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Triebwagen</th>
+        <th scope="col">Personenwaggon(s)</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for zug in zuege %}
+    <tr>
+        <td>{{ zug.nummer }}</td>
+
+        {% set zug_gewicht = namespace(value=0) %}
+        {% set zug_sitzanzahl = namespace(value=0) %}
+        {% set zug_spurweite = namespace(value=0) %}
+        {% set zug_triebwagen = namespace(value=0) %}
+
+        {% for waggon in zug.waggons %}
+        {% if waggon.__class__.__name__ == "Personenwaggon": %}
+        {% set zug_gewicht.value = zug_gewicht.value + waggon.gewicht %}
+        {% set zug_sitzanzahl.value = zug_sitzanzahl.value + waggon.sitzanzahl %}
+        {% else %}
+        {% set zug_triebwagen.value = waggon.fg_nummer %}
+        {% set zug_spurweite.value = waggon.spurweite %}
+        {% endif %}
+        {% endfor %}
+
+        <td>{{ zug_gewicht.value }}</td>
+        <td>{{ zug_spurweite.value }}</td>
+        <td>{{ zug_sitzanzahl.value }}</td>
+        <td>{{ zug_triebwagen.value }}</td>
+        <td>
+            <select class="form-select" aria-label="Disabled select example" name="p_waggons" id="p_waggons" size="3" multiple>
+                {% for waggon in zug.waggons %}
+                {% if waggon.__class__.__name__ == "Personenwaggon": %}
+                <option disabled>{{ waggon.fg_nummer }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </td>
+
+        <td>
+            <div class="btn-group">
+                <button
+                        type="button"
+                        class="btn btn-sm btn-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                ></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/delete-zug/{{zug.id}}" class="dropdown-item">Auflösen</a>
+                        <a href="/edit-zug/{{zug.id}}" class="dropdown-item">Bearbeiten</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Fahrgestellnummer</th>
+        <th scope="col">Typ</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Max. Zugkraft</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Teil von Zug</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <form method="POST" action="">
+        {% for waggon in waggons %}
+        <tr>
+            <td>
+                <input type="checkbox"
+                       id="gewaehlt_fuer_zug"
+                       name="gewaehlt_fuer_zug"
+                       class="input-small"
+                       value="{{ waggon.id }}">
+            </td>
+            <td>{{ waggon.fg_nummer }}</td>
+            <td>{{ waggon.__class__.__name__ }}</td>
+            <td>{{ waggon.spurweite }}</td>
+            <td>{{ waggon.sitzanzahl }}</td>
+            <td>{{ waggon.max_zugkraft }}</td>
+            <td>{{ waggon.gewicht }}</td>
+            {% if waggon.in_verwendung == True %}
+            <td>Ja</td>
+            {% else %}
+            <td>Nein</td>
+            {% endif %}
+            <td>
+                <div class="btn-group">
+                    <button
+                            type="button"
+                            class="btn btn-sm btn-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                    ></button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/delete-waggon/{{waggon.id}}" class="dropdown-item">Löschen</a>
+                            <a href="/edit-waggon/{{waggon.id}}" class="dropdown-item">Bearbeiten</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!--              <a href="/edit-waggon/{{waggon.id}}">-->
+                <!--              <button type="submit" name="edit_waggon" class="btn btn btn-secondary btn-sm" value="edit_waggon">Bearbeiten</button>-->
+                <!--                  </a>-->
+                <!--&lt;!&ndash;              <button type="submit" name="edit_waggon" class="btn btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Bearbeiten</button>&ndash;&gt;-->
+                <!--              <a href="/delete-waggon/{{waggon.id}}">-->
+                <!--              <button type="submit" name="delete_waggon" class="btn btn btn-danger btn-sm" value="delete_waggon">Löschen</button>-->
+                <!--                  </a>-->
+
+
+            </td>
+        </tr>
+        {% endfor %}
+        <button type="submit" name="submit_zug" class="btn btn-secondary btn-sm" value="submit_zug">Zug mit ausgewählten
+            Waggons erstellen
+        </button>
+    </form>
+    <br>
+    <br>
+    <h2>Aktuelle Waggons</h2>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+<h5 class="mb-3">Triebwagen erstellen:</h5>
+<form method="POST" action="" class="form-inline">
+
+    <label for="t_spurweite">Spurweite:</label>
+    <input type="text"
+           id="t_spurweite"
+           name="t_spurweite"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           placeholder="1067 v 1435"
+           value="{{ t_spurweite }}">
+
+    <label for="max_zugkraft">Maximale Zugkraft:</label>
+    <input type="text"
+           id="max_zugkraft"
+           name="max_zugkraft"
+           class="input-small"
+           size="10"
+           placeholder="in Tonnen"
+           value="{{ max_zugkraft }}">
+
+    <button type="submit" name="submit_twagen" class="btn btn-secondary btn-sm" value="submit_twagen">Erstellen</button>
+    <br>
+
+</form>
+
+<br>
+<h5 class="mb-3">Personenwaggon erstellen:</h5>
+<form method="POST" action="" class="form-inline">
+
+    <label for="p_spurweite">Spurweite:</label>
+    <input type="text"
+           id="p_spurweite"
+           name="p_spurweite"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           placeholder="1067 v 1435"
+           value="{{ p_spurweite }}">
+
+    <label for="sitzanzahl">Sitzanzahl:</label>
+    <input type="text"
+           id="sitzanzahl"
+           name="sitzanzahl"
+           class="input-small"
+           size="10"
+           value="{{ sitzanzahl }}">
+
+    <label for="gewicht">Gewicht:</label>
+    <input type="text"
+           id="gewicht"
+           name="gewicht"
+           class="input-small"
+           size="10"
+           placeholder="in Tonnen"
+           value="{{ gewicht }}">
+
+    <button type="submit" name="submit_pwagen" class="btn btn-secondary btn-sm" value="submit_pwagen">Erstellen</button>
+    <br>
+
+</form>
+
+{% endblock %}

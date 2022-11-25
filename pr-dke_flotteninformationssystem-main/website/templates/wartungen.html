@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Wartungen verwalten</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Aktuelle Waggons</h2>
+<br>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Start</th>
+        <th scope="col">Ende</th>
+        <th scope="col">Zug</th>
+        <th scope="col">Mitarbeiter</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wartung in wartungen %}
+    <tr>
+        <td>{{ wartung.date }}</td>
+        <td>{{ waggon. }}</td>
+        <td>{{ waggon.spurweite }}</td>
+        <td>{{ waggon.sitzanzahl }}</td>
+        <td>{{ waggon.max_zugkraft }}</td>
+        <td>{{ waggon.gewicht }}</td>
+        <td>
+            <div class="btn-group">
+                <button
+                        type="button"
+                        class="btn btn-sm btn-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                ></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/delete-wartung/{{wartung.id}}" class="dropdown-item">Löschen</a>
+                        <a href="/edit-wartung/{{wartung.id}}" class="dropdown-item">Bearbeiten</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<form method="POST" action="" class="form-inline">
+
+    <label for="datum">Datum:</label>
+    <input type="text"
+           id="datum"
+           name="datum"
+           class="input-small"
+           placeholder=""
+           value="{{ datum }}">
+
+    <label for="start">Start:</label>
+    <input type="text"
+           id="start"
+           name="start"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           placeholder=""
+           value="{{ start }}">
+
+    <label for="ende">Ende:</label>
+    <input type="text"
+           id="ende"
+           name="ende"
+           class="input-small"
+           size="10"
+           placeholder="in Tonnen"
+           value="{{ ende }}">
+
+    <label for="zug">Zug:</label>
+    <input type="text"
+           id="zug"
+           name="zug"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           placeholder=""
+           value="{{ zug }}">
+
+    <label for="mitarbeiter">Mitarbeiter:</label>
+    <input type="text"
+           id="mitarbeiter"
+           name="mitarbeiter"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           placeholder=""
+           value="{{ mitarbeiter }}">
+
+    <button type="submit" name="submit_wartung" class="btn btn-secondary btn-sm" value="submit_wartung">Erstellen
+    </button>
+    <br>
+
+</form>
+
+{% endblock %}
