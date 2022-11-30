@@ -81,6 +81,48 @@ def get_best_promo_by_route(list_routes, ride_time_str):
     return best_promo
 
 
+@app.route('/timetable', methods=['GET', 'POST'])
+def timetable():
+    form = TicketForm()
+    if form.validate_on_submit():
+        start = int(api.get_station_by_name(form.departure.data)["id"])
+        end = int(api.get_station_by_name(form.destination.data)["id"])
+        date = form.date.data
+        time = form.time.data
+        succ = False
+        res = []
+        promotions = Promotion.query.all()
+        warnings_dict = {}
+        for r in api.get_rides()["data"]:
+            planned_route = api.get_planned_route_by_id(r["plannedroute_id"])
+            ride_time = datetime.strptime(r["time"], "%a, %d %b %Y %H:%M:%S GMT")
+            full_ride = False
+            append = False
+            sections = []
+            route = api.get_route_id_by_sections(planned_route["sections"])
+            ordered_sections = [item for item in route["sections"] if item in planned_route["sections"]]
+            for s in ordered_sections:
+                section = api.get_section_by_id(s)
+                if section["startStation"] == start or append:
+                    full_ride = True
+                    append = True
+                    sections.append(s)
+                if section["endStation"] == end:
+                    append = False
+                    sections.append(s)
+            if full_ride and not append and ride_time.date() == date and ride_time.time() >= time:
+                sections = list(set(sections))
+                r["price"] = r["price"] * (len(sections) / len(ordered_sections))
+                res.append(r)
+                succ = True
+                warnings_dict[r["id"]] = get_warnings_section(sections, route)
+        if not succ:
+            flash("Keine Fahrtdurchführung gefunden!")
+        return render_template("timetable.html", title='Fahrplansuche', result=True, form=form, results=res,
+                               promotions=promotions, pricedict=get_best_promo(), warnings=warnings_dict)
+    return render_template('timetable.html', title='Fahrplansuche', form=form)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

@@ -13,8 +13,8 @@
 </head>
 <body>
 {% if current_user.is_anonymous %}
-<h1><a class="{{ 'navbar_active' if active_page=='home_page' else ''}}" style="margin-top:50%"
-       href="{{ url_for('index') }}"><i class='fas fa-home'></i> Fahrplan</a></h1>
+<h1><a class="{{ 'navbar_active' if active_page=='timetable_page' else ''}}" style="margin-top:50%"
+       href="{{ url_for('timetable') }}"><i class='fas fa-paste'></i> Fahrplan</a></h1>
 {% else %}
 <ul class="navbar">
     {% if current_user.is_admin() %}
