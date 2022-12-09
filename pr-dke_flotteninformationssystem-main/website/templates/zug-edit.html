@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Zug bearbeiten</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Aktuelle Züge</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Zugnummer</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Triebwagen</th>
+        <th scope="col">Personenwaggon(s)</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ zug_to_edit.nummer }}</td>
+
+        {% set zug_gewicht = namespace(value=0) %}
+        {% set zug_sitzanzahl = namespace(value=0) %}
+        {% set zug_spurweite = namespace(value=0) %}
+        {% set zug_triebwagen = namespace(value=0) %}
+
+        {% for waggon in zug_to_edit.waggons %}
+        {% if waggon.__class__.__name__ == "Personenwaggon": %}
+        {% set zug_gewicht.value = zug_gewicht.value + waggon.gewicht %}
+        {% set zug_sitzanzahl.value = zug_sitzanzahl.value + waggon.sitzanzahl %}
+        {% else %}
+        {% set zug_triebwagen.value = waggon.fg_nummer %}
+        {% set zug_spurweite.value = waggon.spurweite %}
+        {% endif %}
+        {% endfor %}
+
+        <td>{{ zug_gewicht.value }}</td>
+        <td>{{ zug_spurweite.value }}</td>
+        <td>{{ zug_sitzanzahl.value }}</td>
+        <td>{{ zug_triebwagen.value }}</td>
+        <td>
+            <form method="POST" action="">
+            <select class="form-select" multiple aria-label="multiple select example" name="p_waggons_select"
+                    id="p_waggons_select"
+                    size="3">
+                {% for waggon in zug_to_edit.waggons %}
+                {% if waggon.__class__.__name__ == "Personenwaggon": %}
+                <option value={{waggon.id}}>{{ waggon.fg_nummer }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+                <br>
+                <button type="submit" name="submit_edit" class="btn btn-secondary btn-sm">Entfernen</button>
+                </form>
+        </td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+{% endblock %}

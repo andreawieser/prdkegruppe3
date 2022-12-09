@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Administrator-Dashboard</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Aktuelle Züge</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Zugnummer</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Triebwagen</th>
+        <th scope="col">Personenwaggon(s)</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for zug in zuege %}
+    <tr>
+        <td>{{ zug.nummer }}</td>
+
+        {% set zug_gewicht = namespace(value=0) %}
+        {% set zug_sitzanzahl = namespace(value=0) %}
+        {% set zug_spurweite = namespace(value=0) %}
+        {% set zug_triebwagen = namespace(value=0) %}
+
+        {% for waggon in zug.waggons %}
+        {% if waggon.__class__.__name__ == "Personenwaggon": %}
+        {% set zug_gewicht.value = zug_gewicht.value + waggon.gewicht %}
+        {% set zug_sitzanzahl.value = zug_sitzanzahl.value + waggon.sitzanzahl %}
+        {% else %}
+        {% set zug_triebwagen.value = waggon.fg_nummer %}
+        {% set zug_spurweite.value = waggon.spurweite %}
+        {% endif %}
+        {% endfor %}
+
+        <td>{{ zug_gewicht.value }}</td>
+        <td>{{ zug_spurweite.value }}</td>
+        <td>{{ zug_sitzanzahl.value }}</td>
+        <td>{{ zug_triebwagen.value }}</td>
+        <td>
+            <select class="form-select" aria-label="Disabled select example" name="p_waggons" id="p_waggons" size="3"
+                    multiple>
+                {% for waggon in zug.waggons %}
+                {% if waggon.__class__.__name__ == "Personenwaggon": %}
+                <option disabled>{{ waggon.fg_nummer }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<h2>Aktuelle Waggons</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Fahrgestellnummer</th>
+        <th scope="col">Typ</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Max. Zugkraft</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Teil eines Zuges</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for waggon in waggons %}
+    <tr>
+        <td>{{ waggon.fg_nummer }}</td>
+        <td>{{ waggon.__class__.__name__ }}</td>
+        <td>{{ waggon.spurweite }}</td>
+        <td>{{ waggon.sitzanzahl }}</td>
+        <td>{{ waggon.max_zugkraft }}</td>
+        <td>{{ waggon.gewicht }}</td>
+        {% if waggon.in_verwendung == True %}
+        <td>Ja</td>
+        {% else %}
+        <td>Nein</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h2>Aktuelle Wartungen</h2>
+<br>
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Start</th>
+        <th scope="col">Ende</th>
+        <th scope="col">Zug</th>
+        <th scope="col">Mitarbeiter</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wartung in wartungen %}
+    <tr>
+        <td>{{ wartung.datum }}</td>
+        <td>{{ wartung.start.strftime("%H:%M") }}</td>
+        <td>{{ wartung.ende.strftime("%H:%M") }}</td>
+        <td>{{ wartung.train_maintenance }}</td>
+        <td>{{ wartung.maintenance }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<h2>Aktuelle Mitarbeiter</h2>
+<br>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">E-Mail</th>
+        <th scope="col">Eingeteilte Wartungen</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.email.partition("@")[0] }}</td>
+        <td>{{ user.email }}</td>
+        {% if user.is_admin %}
+        <td>Keine, weil Admin</td>
+        {% else %}
+        <td>
+            <select class="form-select" aria-label="Disabled select example" name="user_wartungen" id="user_wartungen"
+                    size="3"
+                    multiple>
+                {% for wartung in user.wartungen %}
+                <option disabled>{{ user.wartungen[loop.index0] }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<form method="POST" action="" class="form-inline">
+
+    <label for="email">E-Mail:</label>
+    <input type="text"
+           id="email"
+           name="email"
+           class="input-small"
+           placeholder="name@zug.at"
+           value="{{ email }}">
+
+    <label for="passwort">Passwort:</label>
+    <input type="text"
+           id="passwort"
+           name="passwort"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           value="{{ passwort }}">
+
+    <button type="submit" name="submit_mitarbeiter" class="btn btn-secondary btn-sm" value="submit_mitarbeiter">
+        Erstellen
+    </button>
+    <br>
+
+</form>
+
+{% endblock %}
