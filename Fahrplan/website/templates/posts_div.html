@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">{% block header %}Fahrplan{% endblock %}</h1>
+<div id="posts">
+  {% for post in posts %}
+  <div class="card border-dark">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      {% if user.id == post.author %}
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-sm btn-primary dropdown-toggle"
+          data-bs-toggle="dropdown"
+        ></button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/delete-post/{{post.id}}" class="dropdown-item">Delete</a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+
+        <table class = table-striped>
+          <thread>
+            <tr>
+              <th>Start</th>
+              <th>Ziel</th>
+              <th>Abfahrt</th>
+              <th>Ankunft</th>
+              <th>Datum</th>
+              <th>Zug</th>
+              <th>Preis</th>
+            </tr>
+          </thread>
+          <tbody>
+            <tr>
+              <td>{{post.text}}</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+                
+          </table>
+      </div>
+  <br/ > {% endfor %}
+</div>
+{% block footer %}
+<div align="center">
+</div>
+{% endblock %} {% endblock %}

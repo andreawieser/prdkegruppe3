@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Neue Fahrt erstellen</h1>
+
+<form method="POST">
+  <textarea name="text" id="text" class="form-control"></textarea>
+  <div class="form-group">
+    <label for="start">Start</label>
+    <input
+      type="text"
+      id="start"
+      name="start"
+      class="form-control"
+    />
+    <label for="ziel">Ziel</label>
+    <input
+      type="text"
+      id="ziel"
+      name="ziel"
+      class="form-control"
+    />
+    <label for="abfahrt">Abfahrt</label>
+    <input
+      type="datetime"
+      id="ankunft"
+      name="ankunft"
+      class="form-control"
+    />
+    <label for="ankunft">Ankunft</label>
+    <input
+      type="datetime"
+      id="ankunft"
+      name="ankunft"
+      class="form-control"
+    />
+    <label for="datum">Datum</label>
+    <input
+      type="date"
+      id="datum"
+      name="datum"
+      class="form-control"
+    />
+    <label for="zug">Zug</label>
+    <input
+      type="datetime"
+      id="zug"
+      name="zug"
+      class="form-control"
+    />
+    <label for="preis">Preis</label>
+    <input
+      type="number"
+      id="preis"
+      name="preis"
+      class="form-control"
+    />
+    <label for="bordpersonal">Bordpersonal</label>
+    <select multiple id="mymultiselect" name="mymultiselect">  
+      <option value="1">Bordpersonal_1</option>       
+      <option value="2">Bordpersonal_2</option>       
+      <option value="3">Bordpersonal_3</option>
+    </select>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-primary">Erstellen</button>
+  </div>
+</form>
+<br />
+<div align="center">
+  <a href="/home"
+    ><button type="button" class="btn btn-lg btn-secondary">Zurück</button></a
+  >
+</div>
+{% endblock %}
