@@ -2,6 +2,7 @@
 {% set active_page = 'home_page' %}
 
 {% block content %}
+
 <h1>Fahrplansuche</h1>
 <hr>
 <form action="" method="post" novalidate>
@@ -52,7 +53,7 @@
         {% endif %}
         <td>
             <input type="button"
-                   onclick="window.location.href='{{ url_for( 'buyticket', rideid=r.id, departure=form.departure.data, destination=form.destination.data ) }}';"
+                   onclick="window.location.href='{{ url_for('buyticket', rideid = r.id, departure = form.departure.data, destination = form.destination.data)}}';"
                    value="Kaufen">
         </td>
     </tr>
