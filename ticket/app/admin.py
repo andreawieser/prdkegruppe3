@@ -4,6 +4,8 @@ from flask_login import current_user
 from flask import flash, redirect, url_for
 
 
+# Decorator zur Unterklassenbildung von Admin und Benutzer - es gibt die beiden access level admin und user
+
 def requires_access(access_level):
     def decorator(f):
         @wraps(f)

@@ -2,6 +2,8 @@ from flask import render_template
 from app import app, db
 
 
+# Fehlerbehandlung - bei Error wird das entsprechende Template geladen
+
 @app.errorhandler(404)
 def not_found_error():
     return render_template('404.html'), 404

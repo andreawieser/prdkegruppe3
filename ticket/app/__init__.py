@@ -6,6 +6,10 @@ from flask_login import LoginManager
 from flask_fontawesome import FontAwesome
 from sqlalchemy import event
 
+# Konfigurationen - in SQLite muss die Überprüfung der Foreign Keys explizit aktiviert werden
+# Moodle: "Nützliche Hinweise zum technischen Durchstich"
+# Flask Mega Tutorial: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)

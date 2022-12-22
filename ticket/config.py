@@ -3,6 +3,9 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
+# Flask-SQLAlchmey Configuration aus dem Flask Mega Tutorial
+# https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
+
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \

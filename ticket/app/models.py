@@ -5,6 +5,32 @@ import api
 from app import db, login
 
 
+# Felder für Aktionen in der Datenbank
+
+class Promotion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
+    sale = db.Column(db.Integer)
+    all_routes = db.Column(db.Boolean, default=False)
+    route_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Promotion {} {} {} {} {} {}>'.format(self.id, self.sale, self.start_date, self.end_date, self.route_id,
+                                                      self.all_routes)
+
+    def set_all_routes(self, all_routes):
+        self.all_routes = all_routes
+
+    def set_route_id(self, route_id):
+        self.route_id = route_id
+
+    def get_route_name(self):
+        return api.get_route_name_by_id(self.route_id)
+
+
+# Felder für die Benutzerin oder den Benutzer in der Datenbank
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -41,6 +67,8 @@ class User(UserMixin, db.Model):
         }
 
 
+# Felder für die Tickets in der Datenbank
+
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -63,27 +91,7 @@ class Ticket(db.Model):
         self.seat = seat
 
 
-class Promotion(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-    sale = db.Column(db.Integer)
-    all_routes = db.Column(db.Boolean, default=False)
-    route_id = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<Promotion {} {} {} {} {} {}>'.format(self.id, self.sale, self.start_date, self.end_date, self.route_id,
-                                                      self.all_routes)
-
-    def set_all_routes(self, all_routes):
-        self.all_routes = all_routes
-
-    def set_route_id(self, route_id):
-        self.route_id = route_id
-
-    def get_route_name(self):
-        return api.get_route_name_by_id(self.route_id)
-
+# Aufruf des Benutzers - siehe Flask-Dokumentation: https://flask-login.readthedocs.io/en/latest/
 
 @login.user_loader
 def load_user(id):
