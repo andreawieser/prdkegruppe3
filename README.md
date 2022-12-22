@@ -12,7 +12,7 @@ Python kann unter https://www.python.org/downloads/ gedownloaded werden.
 Eingabeaufforderung: pyhton3
 
 ### 2. Flask
-Die Installation von Flask wird hier https://flask.palletsprojects.com/en/2.2.x/installation/ erklärt. 
+Die Installation von Flask wird hier https://flask.palletsprojects.com/en/2.2.x/installation/ erklärt.  
 Eingabeaufforderung: pip install Flask
 
 ## Installation
@@ -22,7 +22,7 @@ Das GitHub Repository https://github.com/andreawieser/prdkegruppe3.git muss gecl
 Bitte in das Verzeichnis "tickets" wechseln!
 
 ### 2. Virtual environment
-Um die virtuelle Umgebung zu erstellen muss der folgende Befehl ausgeführt werden. 
+Um die virtuelle Umgebung zu erstellen muss der folgende Befehl ausgeführt werden.  
 Eingabeaufforderung: python3 -m venv .venv  
 Um die virtuelle Umgebung zu aktivieren muss je nach Betriebssystem einer der folgenden Befehle ausgeführt werden.  
 Linux - Eingabeaufforderung: source .venv/bin/activate  
@@ -34,7 +34,7 @@ Eingabeaufforderung: pip install -r requirements.txt
 
 ### 4. Database 
 Damit User angelegt werden können, musss eine Datenbank erstellt werden.  
-Ein Admin muss händisch zur Datenbank hinzugefügt werden, alle Benutzerinnen und Benutzer können sich später registrieren. 
+Ein Admin muss händisch zur Datenbank hinzugefügt werden, alle Benutzerinnen und Benutzer können sich später registrieren.  
 Ich habe für den Admin die folgenden Zugangsdaten vorgesehen:   
   Benutzername: admin  
   Passwort: 12345  
