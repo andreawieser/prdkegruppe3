@@ -35,21 +35,21 @@ Eingabeaufforderung: pip install -r requirements.txt
 ### 4. Database 
 Damit User angelegt werden können, musss eine Datenbank erstellt werden. 
 Ein Admin muss händisch zur Datenbank hinzugefügt werden, alle Benutzerinnen und Benutzer können sich später registrieren.
-Ich habe für den Admin die folgenden Zugangsdaten vorgesehen:
-  Benutzername: admin
-  Passwort: 12345
-Bitte die folgenden Befehle nacheindander ausführen, es können aber auch andere Zugangsdaten gesetzt werden. 
-Eingabeaufforderung: flask db init
-Eingabeaufforderung: flask db migrate -m "database creation"
-Eingabeaufforderung: flask db upgrade
-Eingabeaufforderung: pyhton3
-Eingabeaufforderung: from app import db
-Eingabeaufforderung: from app.models import User
-Eingabeaufforderung: u = User(username='admin', email='admin@tickets.com')
-Eingabeaufforderung: u.set_password('12345')
-Eingabeaufforderung: u.set_access('admin')
-Eingabeaufforderung: db.session.add(u)
-Eingabeaufforderung: db.session.commit()
+Ich habe für den Admin die folgenden Zugangsdaten vorgesehen:  
+  Benutzername: admin  
+  Passwort: 12345  
+Bitte die folgenden Befehle nacheindander ausführen, es können aber auch andere Zugangsdaten gesetzt werden.   
+Eingabeaufforderung: flask db init  
+Eingabeaufforderung: flask db migrate -m "database creation"  
+Eingabeaufforderung: flask db upgrade  
+Eingabeaufforderung: pyhton3  
+Eingabeaufforderung: from app import db  
+Eingabeaufforderung: from app.models import User  
+Eingabeaufforderung: u = User(username='admin', email='admin@tickets.com')  
+Eingabeaufforderung: u.set_password('12345')  
+Eingabeaufforderung: u.set_access('admin')  
+Eingabeaufforderung: db.session.add(u)  
+Eingabeaufforderung: db.session.commit()  
 
 ### 5. Dummydata
 In der Klasse api.py muss die Variable "dummydata" auf True gesetzt werden, um die Dummydaten nutzen zu können. 
