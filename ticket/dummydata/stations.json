@@ -1,22 +1,18 @@
 {
   "stations": [
     {
-      "address": "Wien",
       "id": 1,
       "name": "Wien"
     },
     {
-      "address": "Linz",
       "id": 2,
       "name": "Linz"
     },
     {
-      "address": "Wels",
       "id": 3,
       "name": "Wels"
     },
     {
-      "address": "Salzburg",
       "id": 4,
       "name": "Salzburg"
     }

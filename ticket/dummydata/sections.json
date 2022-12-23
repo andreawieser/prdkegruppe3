@@ -1,14 +1,14 @@
 {
   "sections": [
     {
-      "distance": 100,
-      "endStation": 2,
-      "fee": 50.0,
+      "distance": 50,
+      "endStation": 3,
+      "fee": 25.0,
       "id": 1,
       "maxSpeed": 150,
-      "name": "Wien - Linz",
+      "name": "Linz - Wels",
       "routes": [],
-      "startStation": 1
+      "startStation": 2
     },
     {
       "distance": 100,
@@ -19,6 +19,36 @@
       "name": "Linz - Wien",
       "routes": [],
       "startStation": 2
+    },
+    {
+      "distance": 100,
+      "endStation": 4,
+      "fee": 40.0,
+      "id": 3,
+      "maxSpeed": 150,
+      "name": "Linz - Salzburg",
+      "routes": [],
+      "startStation": 2
+    },
+    {
+      "distance": 100,
+      "endStation": 2,
+      "fee": 40.0,
+      "id": 4,
+      "maxSpeed": 150,
+      "name": "Wels-Linz",
+      "routes": [],
+      "startStation": 3
+    },
+    {
+      "distance": 100,
+      "endStation": 2,
+      "fee": 50.0,
+      "id": 5,
+      "maxSpeed": 150,
+      "name": "Wien - Linz",
+      "routes": [],
+      "startStation": 1
     }
   ]
 }

@@ -5,14 +5,14 @@
       "isNormalspur": true,
       "maxWidth": 3,
       "name": "RJ 600",
-      "seats": 600
+      "seats": 100
     },
     {
       "id": 2,
       "isNormalspur": false,
       "maxWidth": 3,
       "name": "ICE 200",
-      "seats": 200
+      "seats": 0
     }
   ]
 }

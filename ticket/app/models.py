@@ -26,7 +26,7 @@ class Promotion(db.Model):
         self.route_id = route_id
 
     def get_route_name(self):
-        return api.get_route_name_by_id(self.route_id)
+        return api.get_route_id(self.route_id)
 
 
 # Felder für die Benutzerin oder den Benutzer in der Datenbank

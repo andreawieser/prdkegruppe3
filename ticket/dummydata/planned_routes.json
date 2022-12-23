@@ -5,7 +5,6 @@
       "id": 1,
       "name": "Linz-Wien",
       "sections": [
-        1,
         2
       ],
       "startStation": 2,
@@ -16,8 +15,7 @@
       "id": 2,
       "name": "Wien-Linz",
       "sections": [
-        1,
-        2
+        5
       ],
       "startStation": 1,
       "start_station_id": 1
@@ -27,11 +25,30 @@
       "id": 3,
       "name": "Linz-Salzburg",
       "sections": [
-        2,
         3
       ],
       "startStation": 2,
       "start_station_id": 2
+    },
+    {
+      "endStation": 3,
+      "id": 4,
+      "name": "Linz-Wels",
+      "sections": [
+        1
+      ],
+      "startStation": 2,
+      "start_station_id": 2
+    },
+    {
+      "endStation": 2,
+      "id": 5,
+      "name": "Wels-Linz",
+      "sections": [
+        4
+      ],
+      "startStation": 3,
+      "start_station_id": 3
     }
   ]
 }

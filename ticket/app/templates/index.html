@@ -38,18 +38,18 @@
         <td><i class="fas fa-arrow-right"></i></td>
         <td>{{ form.destination.data }}</td>
         {% if not warnings.get(r.id) == None and not warnings.get(r.id) == [] %}
-        <td>Warnings:
+        <td>Warnungen:
             {% for w in warnings.get(r.id) %}
             <br>{{ (w) }}
             {% endfor %}
         </td>
         {% endif %}
         {% if pricedict.get(r.id) != 0 %}
-        <td>Price: <br><s style="color:red">{{ (r.price) }}</s> <i style="color:green">-{{ (pricedict.get(r.id)) }}%</i><br>
+        <td>Preis: <br><s style="color:red">{{ (r.price) }}</s> <i style="color:green">-{{ (pricedict.get(r.id)) }}%</i><br>
             {{ (r.price)*(100-pricedict.get(r.id))/100 }}
         </td>
         {% else %}
-        <td>Price: {{ (r.price) }}</td>
+        <td>Preis: {{ (r.price) }}</td>
         {% endif %}
         <td>
             <input type="button"

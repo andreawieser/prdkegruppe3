@@ -5,29 +5,44 @@
       "name": "Weststrecke",
       "sections": [
         1,
-        2
+        2,
+        3,
+        4,
+        5
       ]
     },
     {
       "id": 2,
       "name": "Oststrecke",
       "sections": [
+        1,
         2,
-        3
+        3,
+        4,
+        5
       ]
     },
     {
       "id": 3,
       "name": "Südstrecke",
       "sections": [
+        1,
+        2,
         3,
-        4
+        4,
+        5
       ]
     },
     {
       "id": 4,
       "name": "Nordstrecke",
-      "sections": []
+      "sections": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     }
   ]
 }

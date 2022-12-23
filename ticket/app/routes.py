@@ -112,7 +112,7 @@ def promotion():
         if form.validity.data == 'Preisnachlass für alle Fahrtstrecken':
             promotion.set_all_routes(True)
         else:
-            route_id = api.get_route_id_by_name(form.route.data)
+            route_id = api.get_route_id(form.route.data)
             promotion.set_route_id(route_id)
         db.session.add(promotion)
         db.session.commit()
