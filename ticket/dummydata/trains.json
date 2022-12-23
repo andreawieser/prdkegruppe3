@@ -1,0 +1,18 @@
+{
+  "trains": [
+    {
+      "id": 1,
+      "isNormalspur": true,
+      "maxWidth": 3,
+      "name": "RJ 600",
+      "seats": 600
+    },
+    {
+      "id": 2,
+      "isNormalspur": false,
+      "maxWidth": 3,
+      "name": "ICE 200",
+      "seats": 200
+    }
+  ]
+}
