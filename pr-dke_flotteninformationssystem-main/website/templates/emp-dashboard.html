@@ -6,6 +6,33 @@
 
 {% block content %}
 
+<h2>Meine Wartungen</h2>
+<br>
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Start</th>
+        <th scope="col">Ende</th>
+        <th scope="col">Zug</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wartung in wartungen %}
+    {% if wartung.mitarbeiter == current_user.id %}
+    <tr>
+        <td>{{ wartung.datum }}</td>
+        <td>{{ wartung.start.strftime("%H:%M") }}</td>
+        <td>{{ wartung.ende.strftime("%H:%M") }}</td>
+        <td>{{ wartung.train_maintenance }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
 <h2>Aktuelle Züge</h2>
 
 <table class="table">
@@ -91,32 +118,6 @@
         <td>Nein</td>
         {% endif %}
     </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<br>
-<h2>Meine Wartungen</h2>
-<br>
-<table class="table">
-    <thead class="table-light">
-    <tr>
-        <th scope="col">Datum</th>
-        <th scope="col">Start</th>
-        <th scope="col">Ende</th>
-        <th scope="col">Zug</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for wartung in wartungen %}
-    {% if wartung.mitarbeiter == current_user.id %}
-    <tr>
-        <td>{{ wartung.datum }}</td>
-        <td>{{ wartung.start.strftime("%H:%M") }}</td>
-        <td>{{ wartung.ende.strftime("%H:%M") }}</td>
-        <td>{{ wartung.train_maintenance }}</td>
-    </tr>
-    {% endif %}
     {% endfor %}
     </tbody>
 </table>

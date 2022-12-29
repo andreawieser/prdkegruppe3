@@ -45,23 +45,72 @@
         <td>{{ zug_triebwagen.value }}</td>
         <td>
             <form method="POST" action="">
-            <select class="form-select" multiple aria-label="multiple select example" name="p_waggons_select"
-                    id="p_waggons_select"
-                    size="3">
-                {% for waggon in zug_to_edit.waggons %}
-                {% if waggon.__class__.__name__ == "Personenwaggon": %}
-                <option value={{waggon.id}}>{{ waggon.fg_nummer }}</option>
-                {% endif %}
-                {% endfor %}
-            </select>
+                <select class="form-select" multiple aria-label="multiple select example" name="p_waggons_select"
+                        id="p_waggons_select"
+                        size="3">
+                    {% for waggon in zug_to_edit.waggons %}
+                    {% if waggon.__class__.__name__ == "Personenwaggon": %}
+                    <option value={{waggon.id}}>{{ waggon.fg_nummer }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
                 <br>
-                <button type="submit" name="submit_edit" class="btn btn-secondary btn-sm">Entfernen</button>
-                </form>
+                <button type="submit" name="submit_remove" class="btn btn-secondary btn-sm">Entfernen</button>
+            </form>
         </td>
         <td></td>
     </tr>
     </tbody>
 </table>
+
+<br>
+
+<h2>Aktuelle Waggons</h2>
+
+<form>
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th></th>
+        <th scope="col">Fahrgestellnummer</th>
+        <th scope="col">Typ</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Max. Zugkraft</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Teil eines Zuges</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for waggon in waggons %}
+    {% if waggon.in_verwendung == False and waggon.spurweite == zug_to_edit.waggons[0].spurweite and waggon.__class__.__name__ == "Personenwaggon" %}
+    <tr>
+        <td>
+            <input type="checkbox"
+                   id="gewaehlt_fuer_zug"
+                   name="gewaehlt_fuer_zug"
+                   class="input-small"
+                   value="{{ waggon.id }}">
+        </td>
+        <td>{{ waggon.fg_nummer }}</td>
+        <td>{{ waggon.__class__.__name__ }}</td>
+        <td>{{ waggon.spurweite }}</td>
+        <td>{{ waggon.sitzanzahl }}</td>
+        <td>{{ waggon.max_zugkraft }}</td>
+        <td>{{ waggon.gewicht }}</td>
+        {% if waggon.in_verwendung == True %}
+        <td>Ja</td>
+        {% else %}
+        <td>Nein</td>
+        {% endif %}
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+    <button type="submit" name="submit_add" class="btn btn-secondary btn-sm">Ausgewählte Waggons zu Zug hinzufügen
+        </button>
+</form>
 
 
 

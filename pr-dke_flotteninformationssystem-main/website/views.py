@@ -44,6 +44,7 @@ def home():
 @admin_required
 @login_required
 def flotten():
+    zug_gattungen = ["RJ ", "WB ", "S ", "NJ ", "ICE ", "IC ", "RJX "]
     if request.method == "POST":
         if request.form.get("submit_twagen"):
             t_fg_nummer = "T" + str(random.randint(100000000, 999999999))
@@ -108,7 +109,7 @@ def flotten():
             elif personenwaggon_counter < 1:
                 flash("Bitte wähle zumindest einen Personenwaggon für den Zug aus.", category="danger")
             else:
-                random_zug_number = "Z" + str(random.randint(100000000, 999999999))
+                random_zug_number = random.choice(zug_gattungen) + str(random.randint(1000, 9999))
                 zug = Zug(nummer=random_zug_number, waggons=waggons_chosen)
                 for waggon in waggons_chosen:
                     waggon.in_verwendung = True
@@ -152,7 +153,9 @@ def delete_zug(id):
         for waggon in zug.waggons:
             waggon.in_verwendung = False
         wartung = Wartung.query.filter_by(zug=zug.id).first()
+        print(wartung)
         if wartung is not None:
+            print("wartung vorhanden: " + str(wartung))
             db.session.delete(wartung)
         db.session.delete(zug)
         db.session.commit()
@@ -192,19 +195,53 @@ def update_waggon(id):
 @login_required
 def update_zug(id):
     zug_to_edit = Zug.query.filter_by(id=id).first()
+    waggons = Waggon.query.all()
+    print("Waggons des Zuges vorher: " + str(zug_to_edit.waggons))
     if request.method == "POST":
-        if not zug_to_edit:
-            flash("Zug existiert nicht!", category="danger")
+        if request.form.get("submit_remove"):
+            if not zug_to_edit:
+                flash("Zug existiert nicht!", category="danger")
+            else:
+                selected_waggons = request.form.getlist("p_waggons_select")
+                if not selected_waggons:
+                    flash("Sie haben keine Waggons ausgewählt!", category="danger")
+                    return render_template("zug-edit.html", user=current_user, zug_to_edit=zug_to_edit, waggons=waggons)
+                print(request.form.getlist("p_waggons_select"))
+                for waggon_id in selected_waggons:
+                    waggon = Waggon.query.filter_by(id=waggon_id).first()
+                    zug_to_edit.waggons.remove(waggon)
+                    waggon.in_verwendung = False
+                print("Waggons des Zuges nachher: " + str(zug_to_edit.waggons))
+                db.session.commit()
+                flash("Personenwaggon(s) von Zug entfernt.", category="success")
+        # TODO: Waggon bei Bearbeitung hinzufügen können -> Button in zug-edit.html funktioniert noch nicht!
         else:
-            print(request.form.getlist("p_waggons_select"))
-            # TODO: hier Waggon von Zug entfernen (aber nicht löschen!) -> Tests nicht vergessen (ist Waggon alleine etc.)
+            waggons_fuer_zug = request.form.getlist("gewaehlt_fuer_zug")
+            sum_weight = 0
+            zug_zugkraft = 0
+
+            for waggon in zug_to_edit.waggons:
+                if waggon.__class__.__name__ == "Triebwagen":
+                    zug_zugkraft = waggon.max_zugkraft
+                else:
+                    sum_weight += waggon.gewicht
+
+            for waggon_id in waggons_fuer_zug:
+                waggon = Waggon.query.get(waggon_id)
+                if sum_weight + waggon.gewicht > zug_zugkraft:
+                    flash("Die Zugkraft des Triebwagens reicht nicht", category="danger")
+                    return render_template("zug-edit.html", user=current_user, zug_to_edit=zug_to_edit, waggons=waggons)
+                else:
+                    print("Waggon hinzugefügt!")
+                    # zug_waggons.append(waggon)
             # db.session.commit()
-            flash("Personenwaggon von Zug entfernt.", category="success")
+            flash("Personenwaggon(s) Zug angefügt.", category="success")
+            print("Waggons des Zuges nachher: " + str(zug_to_edit.waggons))
 
         return redirect(url_for("views.flotten"))
+
     else:
-        print("hier")
-        return render_template("zug-edit.html", user=current_user, zug_to_edit=zug_to_edit)
+        return render_template("zug-edit.html", user=current_user, zug_to_edit=zug_to_edit, waggons=waggons)
 
 
 @views.route("/wartungen", methods=["GET", "POST"])
@@ -232,7 +269,8 @@ def wartungen():
             for wartung in wartungen_wartung:
                 if wartung.datum == datum and mitarbeiter.id == wartung.mitarbeiter:
                     if start < wartung.ende and ende > wartung.start:
-                        flash("Zu dieser Zeit ist der Mitarbeiter bereits zu einer Wartung eingeteilt.", category="danger")
+                        flash("Zu dieser Zeit ist der Mitarbeiter bereits zu einer Wartung eingeteilt.",
+                              category="danger")
                         return redirect(url_for("views.wartungen"))
             else:
                 wartung = Wartung(datum=datum, start=start, ende=ende, zug=zug.id, mitarbeiter=mitarbeiter.id)

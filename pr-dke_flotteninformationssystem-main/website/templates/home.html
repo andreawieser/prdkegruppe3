@@ -145,7 +145,7 @@
                     size="3"
                     multiple>
                 {% for wartung in user.wartungen %}
-                <option disabled>{{ user.wartungen[loop.index0] }}</option>
+                <option disabled>{{ user.wartungen[loop.index0]|string + ", " + wartung.train_maintenance|string }}</option>
                 {% endfor %}
             </select>
         </td>

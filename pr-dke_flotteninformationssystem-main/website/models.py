@@ -1,6 +1,6 @@
 from . import db
 from flask_login import UserMixin
-from datetime import datetime, date, time
+from datetime import date, time
 
 
 # SQLAlchemy allows to represent the database structure as classes (called models)
