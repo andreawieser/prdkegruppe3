@@ -49,6 +49,46 @@
       ],
       "startStation": 3,
       "start_station_id": 3
+    },
+    {
+      "endStation": 4,
+      "id": 6,
+      "name": "Wels-Salzburg",
+      "sections": [
+        6
+      ],
+      "startStation": 3,
+      "start_station_id": 3
+    },
+    {
+      "endStation": 4,
+      "id": 7,
+      "name": "Wien-Salzburg",
+      "sections": [
+        7
+      ],
+      "startStation": 1,
+      "start_station_id": 1
+    },
+    {
+      "endStation": 3,
+      "id": 8,
+      "name": "Wien-Wels",
+      "sections": [
+        8
+      ],
+      "startStation": 1,
+      "start_station_id": 1
+    },
+    {
+      "endStation": 1,
+      "id": 9,
+      "name": "Wels-Wien",
+      "sections": [
+        9
+      ],
+      "startStation": 3,
+      "start_station_id": 1
     }
   ]
 }

@@ -6,7 +6,7 @@
       "fee": 25.0,
       "id": 1,
       "maxSpeed": 150,
-      "name": "Linz - Wels",
+      "name": "Linz-Wels",
       "routes": [],
       "startStation": 2
     },
@@ -16,7 +16,7 @@
       "fee": 50.0,
       "id": 2,
       "maxSpeed": 150,
-      "name": "Linz - Wien",
+      "name": "Linz-Wien",
       "routes": [],
       "startStation": 2
     },
@@ -26,7 +26,7 @@
       "fee": 40.0,
       "id": 3,
       "maxSpeed": 150,
-      "name": "Linz - Salzburg",
+      "name": "Linz-Salzburg",
       "routes": [],
       "startStation": 2
     },
@@ -46,9 +46,49 @@
       "fee": 50.0,
       "id": 5,
       "maxSpeed": 150,
-      "name": "Wien - Linz",
+      "name": "Wien-Linz",
       "routes": [],
       "startStation": 1
+    },
+    {
+      "distance": 60,
+      "endStation": 4,
+      "fee": 30.0,
+      "id": 6,
+      "maxSpeed": 150,
+      "name": "Wels-Salzburg",
+      "routes": [],
+      "startStation": 3
+    },
+    {
+      "distance": 130,
+      "endStation": 4,
+      "fee": 80.0,
+      "id": 7,
+      "maxSpeed": 150,
+      "name": "Wien-Salzburg",
+      "routes": [],
+      "startStation": 1
+    },
+    {
+      "distance": 100,
+      "endStation": 3,
+      "fee": 80.0,
+      "id": 8,
+      "maxSpeed": 150,
+      "name": "Wien-Wels",
+      "routes": [],
+      "startStation": 1
+    },
+    {
+      "distance": 100,
+      "endStation": 1,
+      "fee": 80.0,
+      "id": 9,
+      "maxSpeed": 150,
+      "name": "Wels-Wien",
+      "routes": [],
+      "startStation": 3
     }
   ]
 }
