@@ -92,9 +92,6 @@ def flotten():
                         return redirect(url_for("views.flotten"))
                     if waggon.__class__.__name__ == "Triebwagen":
                         triebwagen_counter += 1
-                        # if triebwagen_counter > 1:
-                        #     flash("Bitte wähle (genau) einen Triebwagen aus.", category="danger")
-                        #     return redirect(url_for("views.flotten"))
                         zug_zugkraft = waggon.max_zugkraft
                     else:
                         personenwaggon_counter += 1
@@ -102,8 +99,6 @@ def flotten():
 
             if not waggons_chosen:
                 flash("Bitte wähle (passende) Waggons für den Zug aus.", category="danger")
-            # elif triebwagen_counter != 1:
-            #     flash("Bitte wähle (genau) einen Triebwagen aus.", category="danger")
             elif sum_weight > zug_zugkraft:
                 flash("Die Zugkraft des Triebwagens reicht nicht", category="danger")
             elif personenwaggon_counter < 1:
@@ -214,7 +209,6 @@ def update_zug(id):
                 print("Waggons des Zuges nachher: " + str(zug_to_edit.waggons))
                 db.session.commit()
                 flash("Personenwaggon(s) von Zug entfernt.", category="success")
-        # TODO: Waggon bei Bearbeitung hinzufügen können -> Button in zug-edit.html funktioniert noch nicht!
         else:
             waggons_fuer_zug = request.form.getlist("gewaehlt_fuer_zug")
             sum_weight = 0
@@ -233,8 +227,8 @@ def update_zug(id):
                     return render_template("zug-edit.html", user=current_user, zug_to_edit=zug_to_edit, waggons=waggons)
                 else:
                     print("Waggon hinzugefügt!")
-                    # zug_waggons.append(waggon)
-            # db.session.commit()
+                    zug_to_edit.waggons.append(waggon)
+            db.session.commit()
             flash("Personenwaggon(s) Zug angefügt.", category="success")
             print("Waggons des Zuges nachher: " + str(zug_to_edit.waggons))
 

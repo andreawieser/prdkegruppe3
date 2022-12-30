@@ -76,7 +76,8 @@
 </table>
 
 <br>
-
+<h2>Aktuelle Waggons</h2>
+<form method="POST" action="">
 <table class="table" id="emp-table">
     <thead class="table-light">
     <tr>
@@ -92,7 +93,7 @@
     </tr>
     </thead>
     <tbody>
-    <form method="POST" action="">
+
         {% for waggon in waggons %}
         <tr>
             <td>
@@ -127,29 +128,15 @@
                         </li>
                     </ul>
                 </div>
-
-
-                <!--              <a href="/edit-waggon/{{waggon.id}}">-->
-                <!--              <button type="submit" name="edit_waggon" class="btn btn btn-secondary btn-sm" value="edit_waggon">Bearbeiten</button>-->
-                <!--                  </a>-->
-                <!--&lt;!&ndash;              <button type="submit" name="edit_waggon" class="btn btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Bearbeiten</button>&ndash;&gt;-->
-                <!--              <a href="/delete-waggon/{{waggon.id}}">-->
-                <!--              <button type="submit" name="delete_waggon" class="btn btn btn-danger btn-sm" value="delete_waggon">Löschen</button>-->
-                <!--                  </a>-->
-
-
             </td>
         </tr>
         {% endfor %}
-        <button type="submit" name="submit_zug" class="btn btn-secondary btn-sm" value="submit_zug">Zug mit ausgewählten
+    </tbody>
+</table>
+            <button type="submit" name="submit_zug" class="btn btn-secondary btn-sm" value="submit_zug">Zug mit ausgewählten
             Waggons erstellen
         </button>
     </form>
-    <br>
-    <br>
-    <h2>Aktuelle Waggons</h2>
-    </tbody>
-</table>
 
 <br>
 <br>
