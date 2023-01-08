@@ -24,3 +24,13 @@ button {
     background-color: rgb(201, 196, 174) !important;
     color: black !important;
 }
+
+.btn-custom {
+    background-color: rgb(201, 196, 174) !important;
+    color: black !important;
+}
+
+.login-comp {
+    margin-right: 20%;
+    margin-left: 20%;
+}

@@ -11,7 +11,7 @@
     <form method="POST" action="">
         <!--    the hidden_tag adds a csrf (cross site request forgery) token; needed for protection stuff-->
         {{ form.hidden_tag() }}
-        <fieldset class="form-group">
+        <fieldset class="form-group mt-4 login-comp">
             <legend class="border-bottom mb-4">Login</legend>
             <div class="form-group">
             <!--    using the fields from the form which got passed in-->
@@ -40,13 +40,13 @@
                     {{ form.password(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <div class="form-check">
+            <div class="form-check mt-3">
               {{ form.remember(class="form-check-input") }}
               {{ form.remember.label(class="form-check-label") }}
             </div>
         </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
+        <div class="form-group login-comp">
+            {{ form.submit(class="btn btn-secondary btn-custom mt-3") }}
         </div>
     </form>
 </div>

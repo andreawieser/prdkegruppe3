@@ -41,9 +41,44 @@ def getZuege():
     return jsonify(zuege_list)
 
 
+@api.get("/zuege-komp")
+def getZuegeMin():
+    zuege = Zug.query.all()
+    spurweite = 0
+    zuege_list = []
+    wartungen_list = []
+
+    for zug in zuege:
+        wartungen_list = []
+        sitzplaetze = 0
+        for waggon in zug.waggons:
+            if waggon.__class__.__name__ == "Personenwaggon":
+                spurweite = waggon.spurweite
+                sitzplaetze += waggon.sitzanzahl
+
+        for wartung in zug.wartungen:
+            wartungen_list.append(
+                {
+                    "datum": wartung.datum.isoformat(),
+                    "start": str(wartung.start.strftime("%H:%M")),
+                    "ende": str(wartung.ende.strftime("%H:%M")),
+                }
+            )
+
+        zuege_list.append(
+            {
+                "zugnummer": zug.nummer,
+                "spurweite": spurweite,
+                "sitzplaetze": sitzplaetze,
+                "wartungen": wartungen_list,
+            }
+        )
+
+    return jsonify(zuege_list)
+
+
 @api.get("/zug/<nummer>")
 def getZug(nummer):
-    # zug_nummer = "Z790269576"
     triebwagen = {}
     zug_print = {}
     personenwaggons = []
