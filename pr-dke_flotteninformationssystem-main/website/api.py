@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify
-from website.models import Zug, Wartung
+from website.models import Zug
 
 api = Blueprint("api", __name__, url_prefix="/api")
 
 
-@api.get("/zuege")
+@api.get("/zuege/")
 def getZuege():
     zuege = Zug.query.all()
     spurweite = 0
@@ -41,12 +41,11 @@ def getZuege():
     return jsonify(zuege_list)
 
 
-@api.get("/zuege-komp")
+@api.get("/zuege-komp/")
 def getZuegeMin():
     zuege = Zug.query.all()
     spurweite = 0
     zuege_list = []
-    wartungen_list = []
 
     for zug in zuege:
         wartungen_list = []
@@ -102,26 +101,27 @@ def getZug(nummer):
                     "gewicht": waggon.gewicht,
                     "fahrgestellnummer": waggon.fg_nummer,
                 },
-
             )
 
     return jsonify(zug=zug_print, triebwagen=triebwagen, personenwaggons=personenwaggons)
 
 
-@api.get("/wartungen")
+@api.get("/wartungen/")
 def getWartungen():
-    wartungen = Wartung.query.all()
+    zuege = Zug.query.all()
     wartungen_list = []
 
-    for wartung in wartungen:
-        wartungen_list.append(
-            {
-                "datum": str(wartung.datum),
-                "start": str(wartung.start),
-                "ende": str(wartung.ende),
-                "zug": wartung.zug,
-            }
-        )
+    for zug in zuege:
+        if zug.wartungen:
+            for wartung in zug.wartungen:
+                wartungen_list.append(
+                    {
+                        "zug": zug.nummer,
+                        "datum": str(wartung.datum),
+                        "start": str(wartung.start.strftime("%H:%M")),
+                        "ende": str(wartung.ende.strftime("%H:%M")),
+                    }
+                )
 
     return jsonify(wartungen_list)
 
@@ -135,10 +135,10 @@ def getWartungenVonZug(nummer):
     for wartung in wartungen:
         wartungen_list.append(
             {
+                "zug": zug.nummer,
                 "datum": str(wartung.datum),
-                "start": str(wartung.start),
-                "ende": str(wartung.ende),
-                "zug": wartung.zug,
+                "start": str(wartung.start.strftime("%H:%M")),
+                "ende": str(wartung.ende.strftime("%H:%M")),
             }
         )
 
