@@ -5,6 +5,50 @@
           rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #cccccc;
+        }
+
+        ul.navbar {
+            list-style-type: none;
+            height: 100%;
+        }
+
+        li a {
+            padding: 20px 10px;
+            text-decoration: none;
+            color: #e4042c;
+            font-size: 50px;
+            background-color: #cccccc;
+        }
+
+        input[type=text], [type=password], [type=email], [type=number], select {
+            padding: 10px 20px;
+            margin: 10px 0px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            background-color: #e4042c;
+            color: white;
+            padding: 10px 40px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .start-page {
+            margin-left: 20px;
+        }
+    </style>
     {% if title %}
     <title>{{ title }}</title>
     {% else %}
@@ -13,12 +57,14 @@
 </head>
 <body>
 {% if current_user.is_anonymous %}
-<h1><a class="{{ 'navbar_active' if active_page=='timetable_page' else ''}}" style="margin-top:50%"
-       href="{{url_for('timetable')}}"><i class='fas fa-paste'></i> Fahrplan</a></h1>
+<ul class="navbar">
+    <li><a class="{{ 'navbar_active' if active_page=='timetable_page' else ''}}"
+           href="{{url_for('timetable')}}"><i class='fas fa-paste'></i> Fahrplan</a></li>
+</ul>
 {% else %}
 <ul class="navbar">
     {% if current_user.is_admin() %}
-    <li><a class="{{ 'navbar_active' if active_page=='promotion' else ''}}" style="margin-top:50%"
+    <li><a class="{{ 'navbar_active' if active_page=='promotion' else ''}}"
            href="{{url_for('promotion')}}"><i class='fas fa-bullhorn'></i> Neue Aktion festlegen</a></li>
     <li><a class="{{ 'navbar_active' if active_page=='overview' else ''}}"
            href="{{url_for('overview')}}"><i class='fas fa-paste'></i> Übersicht vorhandene Aktionen</a></li>

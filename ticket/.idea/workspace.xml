@@ -36,10 +36,10 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/HP/OneDrive/Documents/JKU/DKE/PR/prdkegruppe3/ticket&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/HP/OneDrive/Documents/JKU/DKE/PR/Lösungen/Ticketsystem&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.templateLanguages.PyTemplateLanguageModulesConfigurable&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -85,6 +85,10 @@
       <workItem from="1671799118776" duration="3000" />
       <workItem from="1672332930916" duration="875000" />
       <workItem from="1672334243033" duration="1442000" />
+      <workItem from="1672846325192" duration="2000" />
+      <workItem from="1672922330443" duration="6000" />
+      <workItem from="1672922400515" duration="2212000" />
+      <workItem from="1673350931894" duration="6657000" />
     </task>
     <servers />
   </component>
