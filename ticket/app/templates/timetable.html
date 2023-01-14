@@ -37,7 +37,7 @@
         <td><i class="fas fa-arrow-right"></i></td>
         <td>{{ form.destination.data }}</td>
         {% if not warnings.get(r.id) == None and not warnings.get(r.id) == [] %}
-        <td>Warnungen:
+        <td><b>Warnungen:</b>
             {% for w in warnings.get(r.id) %}
             <br>{{ (w) }}
             {% endfor %}

@@ -26,7 +26,7 @@ def get_rides():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5001/api/zuege-komp')
         data = json.loads(response.read())
         return data
 
@@ -48,7 +48,7 @@ def get_planned_routes():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5001')
         data = json.loads(response.read())
         return data
 
@@ -80,7 +80,7 @@ def get_routes():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5002')
         data = json.loads(response.read())
         return data
 
@@ -136,7 +136,7 @@ def get_sections():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5002')
         data = json.loads(response.read())
         return data
 
@@ -158,7 +158,7 @@ def get_trains():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5002')
         data = json.loads(response.read())
         return data
 
@@ -199,7 +199,7 @@ def get_stations():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5002')
         data = json.loads(response.read())
         return data
 
@@ -221,6 +221,6 @@ def get_warnings():
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5000')
+        response = urlopen('http://localhost:5002')
         data = json.loads(response.read())
         return data
