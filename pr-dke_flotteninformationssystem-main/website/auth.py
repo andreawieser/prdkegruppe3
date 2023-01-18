@@ -12,6 +12,8 @@ from functools import wraps
 auth = Blueprint("auth", __name__)
 
 
+# define a decorator whereupon a function only gets triggered if the user is an admin
+# and returns the user to the login page if he is not
 def admin_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -23,6 +25,7 @@ def admin_required(f):
     return wrap
 
 
+# defines the login form
 class LoginForm(FlaskForm):
     email = StringField(label="Email", validators=[DataRequired(), Email()])
     password = PasswordField(label="Password", validators=[DataRequired()])
@@ -32,6 +35,7 @@ class LoginForm(FlaskForm):
 
 
 # parameter methods shows which methods get accepted by the route
+# handles the login-procedure
 @auth.route("/", methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -39,7 +43,6 @@ def login():
 
         # create first admin if not yet created
         if not User.query.filter(User.email == 'admin@zug.at').first():
-            # admin_role = Role(name='Admin')
             db.session.commit()
             user = User(
                 email='admin@zug.at',

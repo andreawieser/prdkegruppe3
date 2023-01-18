@@ -4,6 +4,8 @@ from website.models import Zug
 api = Blueprint("api", __name__, url_prefix="/api")
 
 
+# returns a json-object of all trains with the attributes "zugnummer", "spurweite" and their waggons with their
+# relative attributes
 @api.get("/zuege/")
 def getZuege():
     zuege = Zug.query.all()
@@ -41,6 +43,8 @@ def getZuege():
     return jsonify(zuege_list)
 
 
+# returns a json-object of all trains with its ID ("zugnummer"), its rail gauge ("spurweite"), its total number of
+# seats and its maintenances
 @api.get("/zuege-komp/")
 def getZuegeMin():
     zuege = Zug.query.all()
@@ -76,6 +80,7 @@ def getZuegeMin():
     return jsonify(zuege_list)
 
 
+# analogous to /zuege but only for one particular train identified by its ID ("zugnummer")
 @api.get("/zug/<nummer>")
 def getZug(nummer):
     triebwagen = {}
@@ -106,6 +111,7 @@ def getZug(nummer):
     return jsonify(zug=zug_print, triebwagen=triebwagen, personenwaggons=personenwaggons)
 
 
+# returns a json-object of all maintenances with the maintenanced train, date ("datum"), start time ("start") and end time ("end")
 @api.get("/wartungen/")
 def getWartungen():
     zuege = Zug.query.all()
@@ -126,6 +132,7 @@ def getWartungen():
     return jsonify(wartungen_list)
 
 
+# analogous to /wartungen but only for one particular train identified by its ID ("zugnummer")
 @api.get("/wartungen/<nummer>")
 def getWartungenVonZug(nummer):
     zug = Zug.query.filter_by(nummer=nummer).first()

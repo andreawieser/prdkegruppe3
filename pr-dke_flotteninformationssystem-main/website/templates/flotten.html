@@ -46,7 +46,8 @@
         <td>{{ zug_sitzanzahl.value }}</td>
         <td>{{ zug_triebwagen.value }}</td>
         <td>
-            <select class="form-select" aria-label="Disabled select example" name="p_waggons" id="p_waggons" size="3" multiple>
+            <select class="form-select" aria-label="Disabled select example" name="p_waggons" id="p_waggons" size="3"
+                    multiple>
                 {% for waggon in zug.waggons %}
                 {% if waggon.__class__.__name__ == "Personenwaggon": %}
                 <option disabled>{{ waggon.fg_nummer }}</option>
@@ -78,21 +79,21 @@
 <br>
 <h2>Aktuelle Waggons</h2>
 <form method="POST" action="">
-<table class="table" id="emp-table">
-    <thead class="table-light">
-    <tr>
-        <th scope="col"></th>
-        <th scope="col">Fahrgestellnummer</th>
-        <th scope="col">Typ</th>
-        <th scope="col">Spurweite</th>
-        <th scope="col">Sitzanzahl</th>
-        <th scope="col">Max. Zugkraft</th>
-        <th scope="col">Gewicht</th>
-        <th scope="col">Teil von Zug</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
+    <table class="table" id="emp-table">
+        <thead class="table-light">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Fahrgestellnummer</th>
+            <th scope="col">Typ</th>
+            <th scope="col">Spurweite</th>
+            <th scope="col">Sitzanzahl</th>
+            <th scope="col">Max. Zugkraft</th>
+            <th scope="col">Gewicht</th>
+            <th scope="col">Teil von Zug</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
 
         {% for waggon in waggons %}
         <tr>
@@ -131,12 +132,28 @@
             </td>
         </tr>
         {% endfor %}
-    </tbody>
-</table>
-            <button type="submit" name="submit_zug" class="btn btn-secondary btn-sm" value="submit_zug">Zug mit ausgewählten
-            Waggons erstellen
-        </button>
-    </form>
+        </tbody>
+    </table>
+    <br>
+    <label for="t_spurweite">Zugart (optional, sonst zufällig):</label>
+    <select
+            id="zugnummer_manuell"
+            name="zugnummer_manuell"
+            class="input-small">
+        <option value="none" selected disabled hidden>Auswählen</option>
+        <option value="RJ">RJ</option>
+        <option value="WB">WB</option>
+        <option value="S">S</option>
+        <option value="NJ">NJ</option>
+        <option value="ICE">ICE</option>
+        <option value="IC">IC</option>
+        <option value="RJX">RJX</option>
+    </select>
+
+    <button type="submit" name="submit_zug" class="btn btn-secondary btn-sm" value="submit_zug">Zug mit ausgewählten
+        Waggons erstellen
+    </button>
+</form>
 
 <br>
 <br>
@@ -218,6 +235,9 @@
         }
     }
     colorTable();
+
+
+
 </script>
 
 {% endblock %}
