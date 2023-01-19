@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set active_page = 'overview' %}
+
+{% block content %}
+<h1>Übersicht vorhandene Aktionen</h1>
+<hr>
+<table class="default">
+    <tr>
+        <th>Startdatum</th>
+        <th>Enddatum</th>
+        <th>Nachlass</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for promo in promotions %}
+    <tr class="default">
+        <td>{{ promo.start_date }}</td>
+        <td>{{ promo.end_date }}</td>
+        <td>{{ promo.sale }} %</td>
+        {% if promo.all_routes %}
+        <td>Alle Routen</td>
+        {% else %}
+        <td>{{ promo.get_route_name() }}</td>
+        {% endif %}
+        <td>
+            <input type="button"
+                   onclick="window.location.href='{{ url_for('cancelpromo', promotionid=promo.id ) }}';"
+                   value="Löschen">
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+{% endblock %}
