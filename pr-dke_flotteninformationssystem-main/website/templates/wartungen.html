@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Wartungen verwalten</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Aktuelle Wartungen</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Start</th>
+        <th scope="col">Ende</th>
+        <th scope="col">Zug</th>
+        <th scope="col">Mitarbeiter</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wartung in wartungen %}
+    <tr>
+        <td>{{ wartung.datum }}</td>
+        <td>{{ wartung.start.strftime("%H:%M") }}</td>
+        <td>{{ wartung.ende.strftime("%H:%M") }}</td>
+        <td>{{ wartung.train_maintenance }}</td>
+        <td>{{ wartung.maintenance }}</td>
+        <td>
+            <div class="btn-group">
+                <button
+                        type="button"
+                        class="btn btn-sm btn-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                ></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/delete-wartung/{{wartung.id}}" class="dropdown-item">Löschen</a>
+                        <a href="/edit-wartung/{{wartung.id}}" class="dropdown-item">Bearbeiten</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<h5 class="mb-3">Wartung erstellen:</h5>
+<form method="POST" action="" class="form-inline">
+
+    <label for="wartung_datum">Datum:</label>
+    <input type="date"
+           id="wartung_datum"
+           name="wartung_datum"
+           class="input-small"
+           size="10"
+           maxlength="4"
+           value="{{ wartung_datum }}">
+
+    <label for="wartung_start">Start:</label>
+    <input type="time"
+           id="wartung_start"
+           name="wartung_start"
+           class="input-small"
+           size="10"
+           value="{{ wartung_start }}">
+
+    <label for="wartung_ende">Ende:</label>
+    <input type="time"
+           id="wartung_ende"
+           name="wartung_ende"
+           class="input-small"
+           size="10"
+           value="{{ wartung_ende }}">
+
+    <label for="wartung_zug">Zug:</label>
+    <input list="wartung_zug_list" id="wartung_zug" name="wartung_zug" placeholder="Type/Click to search..." class="input-small">
+    <datalist id="wartung_zug_list">
+        {% for zug in zuege %}
+        <option>{{ zug.nummer }}</option>
+        {% endfor %}
+    </datalist>
+
+    <label for="wartung_mitarbeiter">Mitarbeiter:</label>
+    <input list="wartung_mitarbeiter_list" id="wartung_mitarbeiter" name="wartung_mitarbeiter" placeholder="Type/Click to search..." class="input-small">
+    <datalist id="wartung_mitarbeiter_list">
+        {% for user in users %}
+        <option>{{ user.email }}</option>
+        {% endfor %}
+    </datalist>
+
+    <button type="submit" name="submit_wartung" class="btn btn-secondary btn-sm" value="submit_wartung">Erstellen</button>
+    <br>
+
+</form>
+
+{% endblock %}

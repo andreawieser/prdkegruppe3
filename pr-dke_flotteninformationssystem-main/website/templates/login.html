@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Flotten-Informationssystem</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-section">
+    <!--    when action is empty that means that the form is posted to the same route we are on-->
+    <form method="POST" action="">
+        <!--    the hidden_tag adds a csrf (cross site request forgery) token; needed for protection stuff-->
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group mt-4 login-comp">
+            <legend class="border-bottom mb-4">Login</legend>
+            <div class="form-group">
+            <!--    using the fields from the form which got passed in-->
+                {{ form.email.label(class="form-control-label") }}
+                                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                                {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-check mt-3">
+              {{ form.remember(class="form-check-input") }}
+              {{ form.remember.label(class="form-check-label") }}
+            </div>
+        </fieldset>
+        <div class="form-group login-comp">
+            {{ form.submit(class="btn btn-secondary btn-custom mt-3") }}
+        </div>
+    </form>
+</div>
+
+{% endblock %}

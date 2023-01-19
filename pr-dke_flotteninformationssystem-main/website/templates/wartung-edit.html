@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Wartung bearbeiten</h1>
+{% endblock %}
+
+{% block content %}
+
+<form method="POST" action="" class="form-inline">
+
+    <label for="wartung_datum">Datum:</label>
+    <input type="text"
+           id="wartung_datum"
+           name="wartung_datum"
+           class="input-small"
+           size="10"
+           value="{{ wartung_to_edit.datum }}"
+           onfocus="(this.type='date')">
+
+    <label for="wartung_start">Start:</label>
+    <input type="time"
+           id="wartung_start"
+           name="wartung_start"
+           class="input-small"
+           size="10"
+           value="{{ wartung_to_edit.start }}">
+
+    <label for="wartung_ende">Ende:</label>
+    <input type="time"
+           id="wartung_ende"
+           name="wartung_ende"
+           class="input-small"
+           size="10"
+           value="{{ wartung_to_edit.ende }}">
+
+    <label for="wartung_to_edit_zug">Zug:</label>
+    <input list="wartung_to_edit_zug_list" id="wartung_to_edit_zug" name="wartung_to_edit_zug"
+           value="{{ wartung_to_edit.train_maintenance }}" onfocus="(this.value='')">
+    <datalist id="wartung_to_edit_zug_list">
+        {% for zug in zuege %}
+        <option>{{ zug.nummer }}</option>
+        {% endfor %}
+    </datalist>
+
+    <label for="wartung_to_edit_mitarbeiter">Mitarbeiter:</label>
+    <input list="wartung_to_edit_mitarbeiter_list" id="wartung_to_edit_mitarbeiter" name="wartung_to_edit_mitarbeiter"
+           value="{{ wartung_to_edit.maintenance }}" onfocus="(this.value='')">
+    <datalist id="wartung_to_edit_mitarbeiter_list">
+        {% for user in users %}
+        <option>{{ user.email }}</option>
+        {% endfor %}
+    </datalist>
+
+    <button type="submit" name="submit_wartung" class="btn btn-secondary btn-sm" value="submit_wartung">Speichern
+    </button>
+    <br>
+
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block leftnavbartext %}
+<h1>Mitarbeiter-Dashboard</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Meine Wartungen</h2>
+<br>
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Start</th>
+        <th scope="col">Ende</th>
+        <th scope="col">Zug</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wartung in wartungen %}
+    {% if wartung.mitarbeiter == current_user.id %}
+    <tr>
+        <td>{{ wartung.datum }}</td>
+        <td>{{ wartung.start.strftime("%H:%M") }}</td>
+        <td>{{ wartung.ende.strftime("%H:%M") }}</td>
+        <td>{{ wartung.train_maintenance }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<h2>Aktuelle Züge</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Zugnummer</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Triebwagen</th>
+        <th scope="col">Personenwaggon(s)</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for zug in zuege %}
+    <tr>
+        <td>{{ zug.nummer }}</td>
+
+        {% set zug_gewicht = namespace(value=0) %}
+        {% set zug_sitzanzahl = namespace(value=0) %}
+        {% set zug_spurweite = namespace(value=0) %}
+        {% set zug_triebwagen = namespace(value=0) %}
+
+        {% for waggon in zug.waggons %}
+        {% if waggon.__class__.__name__ == "Personenwaggon": %}
+        {% set zug_gewicht.value = zug_gewicht.value + waggon.gewicht %}
+        {% set zug_sitzanzahl.value = zug_sitzanzahl.value + waggon.sitzanzahl %}
+        {% else %}
+        {% set zug_triebwagen.value = waggon.fg_nummer %}
+        {% set zug_spurweite.value = waggon.spurweite %}
+        {% endif %}
+        {% endfor %}
+
+        <td>{{ zug_gewicht.value }}</td>
+        <td>{{ zug_spurweite.value }}</td>
+        <td>{{ zug_sitzanzahl.value }}</td>
+        <td>{{ zug_triebwagen.value }}</td>
+        <td>
+            <select class="form-select" aria-label="Disabled select example" name="p_waggons" id="p_waggons" size="3"
+                    multiple>
+                {% for waggon in zug.waggons %}
+                {% if waggon.__class__.__name__ == "Personenwaggon": %}
+                <option disabled>{{ waggon.fg_nummer }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<h2>Aktuelle Waggons</h2>
+
+<table class="table" id="emp-table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Fahrgestellnummer</th>
+        <th scope="col">Typ</th>
+        <th scope="col">Spurweite</th>
+        <th scope="col">Sitzanzahl</th>
+        <th scope="col">Max. Zugkraft</th>
+        <th scope="col">Gewicht</th>
+        <th scope="col">Teil eines Zuges</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for waggon in waggons %}
+    <tr>
+        <td>{{ waggon.fg_nummer }}</td>
+        <td>{{ waggon.__class__.__name__ }}</td>
+        <td>{{ waggon.spurweite }}</td>
+        <td>{{ waggon.sitzanzahl }}</td>
+        <td>{{ waggon.max_zugkraft }}</td>
+        <td>{{ waggon.gewicht }}</td>
+        {% if waggon.in_verwendung == True %}
+        <td>Ja</td>
+        {% else %}
+        <td>Nein</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function colorTable() {
+        var x = document.getElementById("emp-table").getElementsByTagName("td");
+        for(let i = 0; i < x.length; i++) {
+            if(x[i].innerText == "Nein") {
+                for(let j = 6; j > -1; j--) {
+                    console.log(x)
+                    //x[i-j].style.backgroundColor = "rgb(239, 237, 228)";
+                    x[i-j].style.backgroundColor = "rgb(255, 253, 250)";
+                }
+            }
+        }
+    }
+    colorTable();
+</script>
+
+{% endblock %}
