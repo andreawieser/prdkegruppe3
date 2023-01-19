@@ -1,0 +1,20 @@
+{
+  "trains": [
+    {
+      "id": 1,
+      "isNormalspur": true,
+      "maxWidth": 3,
+      "name": "RJ600",
+      "seats": 600,
+      "spurweite": 100
+    },
+    {
+      "id": 2,
+      "isNormalspur": false,
+      "maxWidth": 3,
+      "name": "ICE200",
+      "seats": 200,
+      "spurweite": 90
+    }
+  ]
+}
