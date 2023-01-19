@@ -1,0 +1,202 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input[type="checkbox"]').click(function() {
+            var inputValue = $(this).attr("value");
+            $("." + inputValue).toggle();
+        });
+    });
+  </script>
+   <style type="text/css">
+    .selectt {
+        /* flex-grow: 1;  */
+        gap: 50px;
+        color: rgb(5, 5, 5);
+        padding: 30px;
+        display: none;
+        margin-top: 30px;
+        width: 100%;
+        /* background: lightgrey; */
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        /* text-indent: 30px */
+    }
+      
+    label {
+        margin-right: 30px;
+    }
+
+    select {
+        width: 200px;
+        /* background: rgba(0, 0, 0, 0.3); */
+        /* margin: 10px; */
+    }
+    select:focus {
+        min-width: 200px;
+        width: auto;
+    }
+
+    /* input {
+
+      width: 200px;
+    } */
+</style>
+
+<h1 align="center">
+
+<!-- <div class="div_box">
+  Show me when the checkbox is checked and hide me when the checkbox is unchecked.
+</div> -->
+  <br/>Neue Fahrt erstellen</h1>
+  <br><br>
+
+<form method="POST">
+  <section class="layout">
+    <div class="grow1">
+      <strong>Strecken</strong><br>
+      <label for="strecken">Wähle eine oder mehrere</label>
+      <br><br>
+      <select multiple id="mymultiselect1" name="mymultiselect1">  
+        {% for s in  plannedRoutes %}
+          <option value={{s["id"]}}>{{s["name"]}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="grow1">
+      <strong>Bordpersonal</strong><br>
+      <label for="bordpersonal">Wähle eine oder mehrere</label>
+      <br><br>
+      <select multiple id="mymultiselect" name="mymultiselect">  
+        {% for u in users %}
+          <option value={{u.id}}>{{u.username}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div class="grow1">
+    <!-- <strong>Zug</strong><br> -->
+    
+    <label for="zug"><strong>Zug</strong></label>
+      <select id="select_zug" name="select_zug">  
+        {% for s in zuege %}
+          <option value={{s["name"]}}>{{s["name"]}}</option>
+        {% endfor %}
+      </select>
+      <br><br>
+      <label for="preis"><strong>Preis</strong></label>
+      <input
+        type="number"
+        step="0.01"
+        id="preis"
+        name="preis"
+        class="form-control"
+      />
+    </div>
+    <div class="grow1">
+     <div>
+      <strong>Wähle Datum oder Wochentag:</strong><br>
+      <label for="tw">(Nur ein Option auswählen)</label>
+      <br>
+      <label>
+          <input type="checkbox" name="checkbox1" 
+                 value="checkbox1" id="checkbox1">Datum</label>
+      <label>
+          <input type="checkbox" name="checkbox2" 
+                 value="checkbox2" id="checkbox2">Wochentag</label>
+      <br>    
+      <br>
+      <strong>Wähle Uhrzeit oder Zeitintervall:</strong><br>
+      <label for="tw">(Nur ein Option auswählen)</label>
+      <br>
+      <label>
+          <input type="checkbox" name="checkbox3" 
+                 value="checkbox3" id="checkbox3">Uhrzeit</label>
+      <label>
+          <input type="checkbox" name="checkbox4" 
+                 value="checkbox4" id="checkbox4">Zeitintervall</label>
+    </div>
+      
+    </section>
+    </div>
+    <div class="checkbox1 selectt">
+      <strong>Datum</strong>
+      <label for="datum">(Bsp. 01.02.23,02.02.23)</label>
+      <input
+        type="text"
+        id="datum"
+        name="datum"
+        class="form-control"
+      />
+  
+    </div>
+    <div class="checkbox2 selectt">
+      <strong>Wochentag</strong> 
+        <label for="wochen_tag">(Bsp. Montag,Mittwoch)</label>
+      <input
+        type="text"
+        id="wochen_tag"
+        name="wochen_tag"
+        class="form-control"
+      />
+      <label for="anzahl_wochen"><strong>Für wieviele Wochen?</strong></label>
+      <input
+        type="number"
+        id="anzahl_wochen"
+        name="anzahl_wochen"
+        class="form-control"
+      />
+    </div>
+  
+    <div class="checkbox3 selectt">
+      <strong>Uhrzeit</strong>
+      <label for="uhrzeit">(Bsp. 10:30,11:15)</label>
+      <input
+        type="text"
+        id="uhrzeit"
+        name="uhrzeit"
+        class="form-control"
+      />
+  
+    </div>
+    <div class="checkbox4 selectt">
+      <strong>Zeitintervall</strong> 
+      <label for="zeit_intervall">(in Minuten)</label>
+      <input
+        type="text"
+        id="zeit_intervall"
+        name="zeit_intervall"
+        class="form-control"
+      />
+    <strong>Von</strong> 
+    <label for="von">(Bsp. 08:30)</label>
+    <input
+      type="text"
+      id="von"
+      name="von"
+      class="form-control"
+    />
+    <strong>Bis</strong> 
+    <label for="bis">(Bsp. 12:00)</label>
+    <input
+      type="text"
+      id="bis"
+      name="bis"
+      class="form-control"
+    />
+    <br />
+  </div>
+  <br><br>
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-danger">Erstellen</button>
+  </div>
+  </form>
+  <br />
+  <div align="center">
+    <a href="/home"
+      ><button type="button" class="btn btn-lg btn-secondary">Zurück</button></a
+    >
+</div>
+{% endblock %}

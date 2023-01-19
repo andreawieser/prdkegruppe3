@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "end_station_id": 1,
+      "id": 1,
+      "plannedroute_id": 1,
+      "price": 60,
+      "start_station_id": 2,
+      "time": "Sat, 18 Mar 2023 14:44:00 GMT",
+      "train_id": 1
+    },
+    {
+      "end_station_id": 1,
+      "id": 2,
+      "plannedroute_id": 1,
+      "price": 80,
+      "start_station_id": 2,
+      "time": "Sat, 18 Mar 2023 14:44:00 GMT",
+      "train_id": 1
+    },
+    {
+      "end_station_id": 2,
+      "id": 3,
+      "plannedroute_id": 1,
+      "price": 80,
+      "start_station_id": 1,
+      "time": "Sat, 18 Mar 2023 14:44:00 GMT",
+      "train_id": 1
+    },
+    {
+      "end_station_id": 2,
+      "id": 4,
+      "plannedroute_id": 1,
+      "price": 80,
+      "start_station_id": 1,
+      "time": "Sat, 18 Mar 2023 14:44:00 GMT",
+      "train_id": 1
+    },
+    {
+      "end_station_id": 4,
+      "id": 5,
+      "plannedroute_id": 1,
+      "price": 70,
+      "start_station_id": 2,
+      "time": "Sat, 18 Mar 2023 14:44:00 GMT",
+      "train_id": 1
+    },
+    {
+      "end_station_id": 4,
+      "id": 6,
+      "plannedroute_id": 1,
+      "price": 60,
+      "start_station_id": 2,
+      "time": "Sat, 18 Mar 2023 14:44:00 GMT",
+      "train_id": 1
+    }
+  ]
+}
