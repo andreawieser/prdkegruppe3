@@ -201,12 +201,12 @@ def getfahrplan():
         fahrten_liste.append(
             {
                 "id": fahrt.id,
-                "startBhf": fahrt.start,
-                "endBhf": fahrt.ziel,
-                "Zug": fahrt.zug,
-                "Preis": fahrt.preis,
+                "startStation": fahrt.start,
+                "endStation": fahrt.ziel,
+                "train_id": fahrt.zug,
+                "price": fahrt.preis,
                 "Datum": fahrt.datum,
-                "Abfahrt": fahrt.uhrzeit,
+                "time": fahrt.uhrzeit,
                 "Ankunft": fahrt.ankunft,
 
             }

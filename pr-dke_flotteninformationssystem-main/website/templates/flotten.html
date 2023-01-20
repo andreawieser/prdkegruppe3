@@ -135,7 +135,7 @@
         </tbody>
     </table>
     <br>
-    <label for="t_spurweite">Zugart (optional, sonst zufällig):</label>
+    <label for="zugnummer_manuell">Zugart (optional, sonst zufällig):</label>
     <select
             id="zugnummer_manuell"
             name="zugnummer_manuell"
@@ -162,14 +162,13 @@
 <form method="POST" action="" class="form-inline">
 
     <label for="t_spurweite">Spurweite:</label>
-    <input type="text"
-           id="t_spurweite"
-           name="t_spurweite"
-           class="input-small"
-           size="10"
-           maxlength="4"
-           placeholder="1067 v 1435"
-           value="{{ t_spurweite }}">
+    <select
+            id="t_spurweite"
+            name="t_spurweite"
+            class="input-small">
+        <option value="1435">1435</option>
+        <option value="1067">1067</option>
+    </select>
 
     <label for="max_zugkraft">Maximale Zugkraft:</label>
     <input type="text"
@@ -190,14 +189,13 @@
 <form method="POST" action="" class="form-inline">
 
     <label for="p_spurweite">Spurweite:</label>
-    <input type="text"
-           id="p_spurweite"
-           name="p_spurweite"
-           class="input-small"
-           size="10"
-           maxlength="4"
-           placeholder="1067 v 1435"
-           value="{{ p_spurweite }}">
+    <select
+            id="p_spurweite"
+            name="p_spurweite"
+            class="input-small">
+        <option value="1435">1435</option>
+        <option value="1067">1067</option>
+    </select>
 
     <label for="sitzanzahl">Sitzanzahl:</label>
     <input type="text"

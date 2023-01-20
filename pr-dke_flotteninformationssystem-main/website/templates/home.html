@@ -130,6 +130,7 @@
         <th scope="col">Name</th>
         <th scope="col">E-Mail</th>
         <th scope="col">Eingeteilte Wartungen</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -150,6 +151,23 @@
             </select>
         </td>
         {% endif %}
+
+         <td>
+                <div class="btn-group">
+                    <button
+                            type="button"
+                            class="btn btn-sm btn-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                    ></button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/delete-user/{{user.id}}" class="dropdown-item">Löschen</a>
+                            <a href="/edit-user/{{user.id}}" class="dropdown-item">Bearbeiten</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+
     </tr>
     {% endfor %}
     </tbody>
@@ -174,6 +192,9 @@
            size="10"
            maxlength="4"
            value="{{ passwort }}">
+
+        <label for="is_admin">Admin:</label>
+        <input type="checkbox" id="is_admin" name="is_admin" class="input-small">
 
     <button type="submit" name="submit_mitarbeiter" class="btn btn-secondary btn-sm" value="submit_mitarbeiter">
         Erstellen

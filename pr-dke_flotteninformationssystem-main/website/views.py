@@ -16,7 +16,6 @@ views = Blueprint("views", __name__)
 # makes sure you can't access the homepage unless the user is logged in
 @login_required
 def home():
-    users = User.query.all()
     waggons = Waggon.query.all()
     zuege = Zug.query.all()
     wartungen_home = Wartung.query.order_by(Wartung.datum).all()
@@ -27,13 +26,20 @@ def home():
             if request.form.get("submit_mitarbeiter"):
                 email = request.form.get("email")
                 password = request.form.get("passwort")
+                admin = request.form.get("is_admin")
                 if not email or not password:
                     flash("Bitte vervollständige die Eingabe.", category="danger")
                 else:
-                    new_user = User(email=email, password=generate_password_hash(password, method="sha256"))
+                    if admin:
+                        new_user = User(email=email, password=generate_password_hash(password, method="sha256"),
+                                        is_admin=True)
+                    else:
+                        new_user = User(email=email, password=generate_password_hash(password, method="sha256"))
                     db.session.add(new_user)
                     db.session.commit()
                     flash("Mitarbeiter erstellt!", category="success")
+
+        users = User.query.all()
         return render_template("home.html", user=current_user, waggons=waggons, users=users, zuege=zuege,
                                wartungen=wartungen_home)
     else:
@@ -121,9 +127,8 @@ def flotten():
                 else:
                     zug_bezeichnung = request.form.get("zugnummer_manuell") + str(random.randint(1000, 9999))
                 zug = Zug(nummer=zug_bezeichnung, waggons=waggons_chosen)
-                print(zug.nummer)
                 for waggon in waggons_chosen:
-                   waggon.in_verwendung = True
+                    waggon.in_verwendung = True
                 db.session.add(zug)
                 db.session.commit()
                 flash("Zug erstellt!", category="success")
@@ -132,6 +137,20 @@ def flotten():
     zuege = Zug.query.all()
 
     return render_template("flotten.html", user=current_user, waggons=waggons, zuege=zuege)
+
+
+@views.route("/delete-user/<id>")
+@admin_required
+@login_required
+def delete_user(id):
+    user = User.query.filter_by(id=id).first()
+    if not user:
+        flash("User existiert nicht!", category="danger")
+    else:
+        db.session.delete(user)
+        db.session.commit()
+        flash("User " + str(user) + " wurde gelöscht.", category="success")
+    return redirect(url_for("views.home"))
 
 
 @views.route("/delete-waggon/<id>")
