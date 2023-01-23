@@ -1,0 +1,16 @@
+{
+    "bordpersonal": [
+      {
+        "id": 1,
+        "name": "Bordpersonal 1"
+      },
+      {
+        "id": 2,
+        "name": "Bordpersonal 2"
+      },
+      {
+        "id": 3,
+        "name": "Bordpersonal 3"
+      }
+    ]
+  }

@@ -114,7 +114,8 @@ def flotten():
 
             # check on various values in order to evaluate if the creation of a train is valid
             if not waggons_chosen:
-                flash("Bitte wähle (passende) Waggons für den Zug aus.", category="danger")
+                flash("Bitte wähle (passende) Waggons für den Zug aus. Möglicherweise sind die gewählten Waggons "
+                      "bereits Teil eines Zuges ", category="danger")
             elif sum_weight > zug_zugkraft:
                 flash("Die Zugkraft des Triebwagens reicht nicht", category="danger")
             elif personenwaggon_counter < 1:
@@ -164,9 +165,9 @@ def delete_waggon(id):
     else:
         zug = Zug.query.get(waggon.zug)
         if zug is not None:
-            if zug.waggons < 3 or waggon.type == Triebwagen and waggon.zug is not None:
+            if (len(zug.waggons)) < 3 or waggon.type == Triebwagen and waggon.zug is not None:
                 db.session.delete(zug)
-                flash("Zug wurde gelöscht, da keine korrekte Kombination aus Waggons mehr vorliegt")
+                flash("Zug wurde gelöscht, da keine korrekte Kombination aus Waggons mehr vorliegt", category="info")
         db.session.delete(waggon)
         db.session.commit()
         flash("Waggon gelöscht.", category="success")
@@ -363,3 +364,32 @@ def update_wartung(id):
         users = User.query.filter_by(is_admin=False).all()
         return render_template("wartung-edit.html", user=current_user, wartung_to_edit=wartung_to_edit, zuege=zuege,
                                users=users)
+
+
+@views.route("/edit-user/<id>", methods=["GET", "POST"])
+@admin_required
+@login_required
+def update_user(id):
+    user_to_edit = User.query.filter_by(id=id).first()
+    if request.method == "POST":
+        if not user_to_edit:
+            flash("User existiert nicht!", category="danger")
+        else:
+            user_to_edit.email = request.form.get("user_email")
+            is_admin = request.form.get("user_admin_rights")
+            if is_admin is None:
+                user_to_edit.is_admin = False
+            else:
+                print(user_to_edit.wartungen)
+                if len(user_to_edit.wartungen) == 0:
+                    user_to_edit.is_admin = True
+                else:
+                    user_to_edit.is_admin = False
+                    flash("Dem User konnten keine Admin-Rechte gegeben werden, weil dieser zu einer oder mehreren "
+                          "Wartungen zugeteilt ist.", category="danger")
+            db.session.commit()
+        flash("User aktualisiert.", category="success")
+        return redirect(url_for("views.home"))
+    else:
+        users = User.query.all()
+        return render_template("user-edit.html", user=current_user, user_to_edit=user_to_edit, users=users)

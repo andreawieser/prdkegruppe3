@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rl="stylesheet" href="/static/stylesl.css"/>
+    <title>{% block title %}{% endblock %}</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dubrox/Multiple-Dates-Picker-for-jQuery-UI@master/jquery-ui.multidatespicker.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="templates/style.css"> -->
+    <style>
+      .layout {
+        width: 100%;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+  
+      .grow1 { 
+        flex-grow: 1; 
+      }
+
+      .grow2 { 
+        flex-grow: 1; 
+      }
+    /* .navbar{
+        /* width: 100%; */
+        /* background-color: #f2f2d1; */
+        /* background-color:rgb(166, 202, 131) */
+        /* background-color:rgb(182, 206, 159) */
+        /* background-color:bisque */
+    /* } */ 
+    /* .navbar-custom {
+            background-color: lightgreen;
+        } */
+
+    /* .checkbox:checked {
+    display: block;
+  } */
+    </style>
+    <script>
+      function myFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("myCheck");
+  // Get the output text
+  var text = document.getElementById("text");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+    </script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/home">Home</a>
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="/logout">Logout</a>
+            <!-- <a class="nav-item nav-link" href="/create-post">Neue Fahrt erstellen</a> -->
+            <a class="nav-item nav-link" href="/posts/{{user.username}}">Meine Fahrten</a>
+            {% if user.get_admin() == 'True' %}
+            <a class="nav-item nav-link" href="/create-post">Neue Fahrtdurchführung erstellen</a>
+            <a class="nav-item nav-link" href="/sign-up">Neuen Account erstellen</a>
+            {% endif %}
+            {% else %}
+            <a class="nav-item nav-link" href="/login">Login</a>
+            <a class="nav-item nav-link" href="/sign-up">Benutzer erstellen</a>
+            {% endif %}
+            <!-- {% if user.admin == "true" %}
+            <a class="nav-item nav-link" href="/create-post">Neue Fahrt erstellen 2</a>
+            {% endif %} -->
+            
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <div class="container">{% block content %}{% endblock %}</div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

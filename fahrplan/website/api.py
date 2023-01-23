@@ -7,7 +7,7 @@ from flask import json, jsonify, Blueprint
 
 api = Blueprint("api", __name__, url_prefix="/api")
 
-dummydata = False
+dummydata = True
 
 # @api.route("/fahrplan")
 # def getfahrplan():
@@ -56,7 +56,7 @@ def get_zuege():
             list.append(d)
         return list
     else:
-        response = urlopen('http://localhost:5002/get/zuege')
+        response = urlopen('http://localhost:5002/api/zuege')
         # 'http://localhost:5002/get/zuege'
         # https://jsonplaceholder.typicode.com/posts
         data = json.loads(response.read())
