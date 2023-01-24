@@ -9,24 +9,15 @@ from flask import json
 dummydata = True
 
 
-# Fahrtdurchführungen haben eine ID
+# Geplante Fahrtdurchführungen werden von den Dummydaten geladen oder vom Fahrplansystem
 
-def get_ride_by_id(id):
-    data = get_rides()
-    for r in data["data"]:
-        if id == r["id"]:
-            return r
-
-
-# Fahrtdurchführungen werden von den Dummydaten geladen oder von den anderen Applikationen
-
-def get_rides():
+def get_planned_routes():
     if dummydata:
-        js = open("./dummydata/rides.json")
+        js = open("./dummydata/planned_routes.json")
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5001/api/zuege-komp')
+        response = urlopen('http://127.0.0.1:5001/api/fahrplan')
         data = json.loads(response.read())
         return data
 
@@ -40,17 +31,34 @@ def get_planned_route_by_id(id):
             return pr
 
 
-# Geplante Fahrtdurchführungen werden von den Dummydaten geladen oder von den anderen Applikationen
+# Fahrtdurchführungen werden von den Dummydaten geladen oder vom Fahrplansystem
 
-def get_planned_routes():
+def get_rides():
     if dummydata:
-        js = open("./dummydata/planned_routes.json")
+        js = open("./dummydata/rides.json")
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5001/api/fahrplan')
+        response = urlopen('http://127.0.0.1:5001/api/fahrplan')
         data = json.loads(response.read())
         return data
+
+
+# Fahrtdurchführungen haben eine ID
+
+def get_ride_by_id(id):
+    data = get_rides()
+    for r in data["data"]:
+        if id == r["id"]:
+            return r
+
+
+# Strecken werden von den Dummydaten geladen, da sie vom Streckensystem bereitgestellt werden würden
+
+def get_routes():
+    js = open("./dummydata/routes.json")
+    data = json.load(js)
+    return data
 
 
 # Strecken haben eine ID
@@ -70,19 +78,6 @@ def get_route_name():
     for r in routes["routes"]:
         name.append(r["name"])
     return list(dict.fromkeys(name))
-
-
-# Strecken werden von den Dummydaten geladen oder von den anderen Applikationen
-
-def get_routes():
-    if dummydata:
-        js = open("./dummydata/routes.json")
-        data = json.load(js)
-        return data
-    else:
-        response = urlopen('http://localhost:5002/api/fahrplan')
-        data = json.loads(response.read())
-        return data
 
 
 # Strecken-ID kann anhand der Linie gefunden werden
@@ -107,6 +102,19 @@ def get_route_of_ride(id):
     return set(routes)
 
 
+# Linien werden von den Dummydaten geladen oder vom Fahrplansystem
+
+def get_sections():
+    if dummydata:
+        js = open("./dummydata/sections.json")
+        data = json.load(js)
+        return data
+    else:
+        response = urlopen('http://127.0.0.1:5001/api/fahrplan')
+        data = json.loads(response.read())
+        return data
+
+
 # Linien haben eine ID
 
 def get_section_by_id(id):
@@ -128,15 +136,15 @@ def get_sections_by_route_id(id):
     return list(k for k, _ in itertools.groupby(route))
 
 
-# Linien werden von den Dummydaten geladen oder von den anderen Applikationen
+# Züge werden von den Dummydaten geladen oder vom Flottensystem
 
-def get_sections():
+def get_trains():
     if dummydata:
-        js = open("./dummydata/sections.json")
+        js = open("dummydata/trains.json")
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5002/api/fahrplan')
+        response = urlopen('http://127.0.0.1:5002/api/zuege-komp/')
         data = json.loads(response.read())
         return data
 
@@ -150,15 +158,15 @@ def get_train_by_id(id):
             return t
 
 
-# Züge werden von den Dummydaten geladen oder von den anderen Applikationen
+# Haltestellen werden von den Dummydaten geladen oder vom Fahrplansystem
 
-def get_trains():
+def get_stations():
     if dummydata:
-        js = open("./dummydata/trains.json")
+        js = open("./dummydata/stations.json")
         data = json.load(js)
         return data
     else:
-        response = urlopen('http://localhost:5002/api/fahrplan')
+        response = urlopen('http://127.0.0.1:5001/api/fahrplan')
         data = json.loads(response.read())
         return data
 
@@ -191,17 +199,12 @@ def get_station_by_name(name):
             return s
 
 
-# Haltestellen werden von den Dummydaten geladen oder von den anderen Applikationen
+# Warnungen werden von den Dummydaten geladen, da sie vom Streckensystem bereitgestellt werden würden
 
-def get_stations():
-    if dummydata:
-        js = open("./dummydata/stations.json")
-        data = json.load(js)
-        return data
-    else:
-        response = urlopen('http://localhost:5002/api/fahrplan')
-        data = json.loads(response.read())
-        return data
+def get_warnings():
+    js = open("./dummydata/warnings.json")
+    data = json.load(js)
+    return data
 
 
 # Warnungen haben eine ID
@@ -211,16 +214,3 @@ def get_warning_by_id(id):
     for d in data["data"]:
         if id == d["id"]:
             return d
-
-
-# Warnungen werden von den Dummydaten geladen oder von den anderen Applikationen
-
-def get_warnings():
-    if dummydata:
-        js = open("./dummydata/warnings.json")
-        data = json.load(js)
-        return data
-    else:
-        response = urlopen('http://localhost:5002/api/fahrplan')
-        data = json.loads(response.read())
-        return data
