@@ -1,0 +1,75 @@
+[
+    
+    {
+        "zugnummer": "RJ600",
+        "sitzplaetze": 199,
+        "seats": 600,
+        "spurweite": 1435,
+        "wartungen": [
+            {
+                "datum": "2023-02-15",
+                "start": "02:30",
+                "ende": "16:00"
+            },
+            {
+                "datum": "2023-03-01",
+                "start": "07:00",
+                "ende": "13:30"
+            }
+        ]
+    },
+    {
+        "zugnummer": "RJ700",
+        "sitzplaetze": 199,
+        "seats": 600,
+        "spurweite": 1435,
+        "wartungen": [
+            {
+                "datum": "2023-02-15",
+                "start": "02:30",
+                "ende": "16:00"
+            },
+            {
+                "datum": "2023-03-01",
+                "start": "07:00",
+                "ende": "13:30"
+            }
+        ]
+    },
+    {
+        "zugnummer": "ICE200",
+        "sitzplaetze": 199,
+        "seats": 600,
+        "spurweite": 1435,
+        "wartungen": [
+            {
+                "datum": "2023-02-15",
+                "start": "02:30",
+                "ende": "16:00"
+            },
+            {
+                "datum": "2023-03-01",
+                "start": "07:00",
+                "ende": "13:30"
+            }
+        ]
+    },
+    {
+        "zugnummer": "ICE900",
+        "sitzplaetze": 199,
+        "seats": 600,
+        "spurweite": 1435,
+        "wartungen": [
+            {
+                "datum": "2023-02-15",
+                "start": "02:30",
+                "ende": "16:00"
+            },
+            {
+                "datum": "2023-03-01",
+                "start": "07:00",
+                "ende": "13:30"
+            }
+        ]
+    }
+]

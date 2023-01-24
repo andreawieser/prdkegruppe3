@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block title %}Bearbeiten von Id {{id}}{% endblock %} {% block
+    content %}
+<style>
+    select {
+        width: 200px;
+        /* background: rgba(0, 0, 0, 0.3); */
+        /* margin: 10px; */
+    }
+    .grow1 { 
+        flex-grow: 1;
+        /* flex-basis: auto; */
+        width: 0; 
+        /* flex-flow: row wrap; */
+      }
+</style>
+    <form method="POST">
+      <br><br>
+      <h3 align="center">Bearbeiten von Fahrtdurchführung {{id}}</h3>
+      <div class="form-group" align="center">
+        <br><br>
+
+        <section class="layout" style="background-color: rgb(166, 191, 228)">
+          <div class="grow1">
+            <br><br>
+            
+            <label for="b" style="font-size:18pt">Bordpersonal</label>
+            
+            <br><br>
+            ID's des aktuellen Bordpersonals: {{bordpersonal_bisher}}
+        <br><br>
+        <strong>Bordpersonal neu festlegen:</strong><br>
+        <label for="bordpersonal">Wähle eine oder mehrere Personen</label>
+        
+        <br><br>
+        <select multiple id="mymultiselect" name="mymultiselect">  
+          {% for u in users %}
+            <option value={{u.id}}>{{u.username}} (ID: {{u.id}})</option>
+          {% endfor %}
+        </select>
+        <br><br>
+        Wenn das Bordpersonal gleich bleiben soll, 
+        <br>Feld leer lassen.
+        <br><br>
+          </div>
+          <div class="grow1" style="background-color: rgb(202, 219, 246)">
+          <!-- <strong>Zug</strong><br> -->
+          <br><br>
+          <label for="z" style="font-size:18pt">Zug</label>
+          <br><br>
+          Aktueller Zug: {{zug_bisher}}
+          <br><br>
+          <label for="zug"><strong>Neuer Zug:</strong></label>
+          <br><br>
+          <select id="select_zug" name="select_zug">  
+            {% for s in zuege %}
+              <option value={{s["zugnummer"]}}>{{s["zugnummer"]}}</option>
+            {% endfor %}
+          </select>
+          <br><br>
+          Wenn der Zug gleich bleiben soll, gleichen Zug auswählen.
+          </div>
+          <div class="grow1">
+           <div>
+            <br><br>
+            <label for="" style="font-size:18pt">Preis</label>
+            <br><br>
+
+            Aktueller Preis: € {{preis_bisher}}
+        <br><br>
+        Der Preis muss mindestens 
+        <label for="min_p" style="color:rgb(112, 3, 3)"><strong> € {{min_preis}} </strong></label>
+        betragen!
+        <br><br>
+        <label for="preis"><strong>Neuer Preis:</strong></label>
+        <input
+          type="number"
+          step="0.01"
+          id="preis"
+          name="preis"
+          class="form-control"
+          style="width: 150px"
+        />
+        <br>
+        Wenn der Preis gleich bleiben soll, Feld leer lassen.
+        <br />
+          </div>
+            
+          </section>
+          <br><br>
+        <div align="center">
+          <button class="btn" type="submit" style="background-color: rgb(112, 3, 3); color:white">Änderung speichern</button>
+        </div>
+      </div>
+    </form>
+    {% endblock %}
+    
