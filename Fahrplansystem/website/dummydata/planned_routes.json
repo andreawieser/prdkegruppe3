@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "startStation": 2,
+      "endStation": 1,    
+      "name": "Linz-Wien",      
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      
+      "id": 2,
+      "startStation": 1,
+      "endStation": 2,
+      "name": "Wien-Linz",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      "id": 3,
+      "startStation": 2,
+      "endStation": 4,
+      "name": "Linz-Salzburg",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      "id": 4,
+      "startStation": 4,
+      "endStation": 2,
+      "name": "Salzburg-Linz",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      "id": 5,
+      "startStation": 4,
+      "endStation": 5,
+      "name": "Salzburg-Klagenfurt",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      
+      "id": 6,
+      "startStation": 5,
+      "endStation": 4,
+      "name": "Klagenfurt-Salzburg",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      
+      "id": 7,
+      "startStation": 1,
+      "endStation": 3,
+      "name": "Wien-St.Poelten",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    },
+    {
+      
+      "id": 8,
+      "startStation": 3,
+      "endStation": 1,
+      "name": "St.Poelten-Wien",
+      "spurweite": 100,
+      "maxSpeed": 150,
+      "distance": 100
+    }
+  ]
+}
