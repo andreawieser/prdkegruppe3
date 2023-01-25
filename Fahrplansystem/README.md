@@ -1,4 +1,4 @@
-#Anleitung Fahrplansystem
+# Anleitung Fahrplansystem
 
 In dieser Anleitung wird erklärt, welche Schritte nötig sind, um das Fahrplansystem ausführen zu können und wie die Website funktioniert.
 
