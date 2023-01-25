@@ -40,7 +40,7 @@ Um eine neue Fahrtdurchführung zu erstellen, muss zu allererst eine Strecke gew
 ### Nicht zulässig:
 -	Linz-Wien
 -	Wien-Linz
-oder
+- oder
 -	Linz-Wien
 -	Salzburg-Klagenfurt
 
