@@ -1,8 +1,11 @@
-Anleitung Fahrplansystem
+#Anleitung Fahrplansystem
+
 In dieser Anleitung wird erklärt, welche Schritte nötig sind, um das Fahrplansystem ausführen zu können und wie die Website funktioniert.
-1.	Coding Environment
+
+##1.	Coding Environment
 Als Entwicklungsumgebung wurde Visual Studio verwendet und die verwendete Programmiersprache ist Python.
-2.	Flask Setup
+
+##2.	Flask Setup
 Um das Programm nutzen zu können, müssen über die Eingabeaufforderung folgende Installationen erfolgen:
 •	pip install flask
 •	pip install Flask-SQLAlchemy
