@@ -7,9 +7,9 @@ Als Entwicklungsumgebung wurde Visual Studio verwendet und die verwendete Progra
 
 ## 2.	Flask Setup
 Um das Programm nutzen zu können, müssen über die Eingabeaufforderung folgende Installationen erfolgen:
-•	pip install flask
-•	pip install Flask-SQLAlchemy
-•	pip install flask-login
+-	pip install flask
+-	pip install Flask-SQLAlchemy
+-	pip install flask-login
 
 ## 3.	Ausführen der Applikation
 Um auf das Programm zugreifen zu können, kann das Repositorie entweder geklont werden, oder der Code kann mittels ZIP-Ordner heruntergeladen werden.
@@ -35,14 +35,14 @@ In der Registerkarte „Meine Fahrten“ scheinen nur die Fahrten auf, denen der
 ## 9.	Neue Fahrdurchführung erstellen
 Um eine neue Fahrtdurchführung zu erstellen, muss zu allererst eine Strecke gewählt werden. Hier ist es wichtig, nur Strecken zu wählen, welche auch verbunden werden können. Nicht zulässig sind Strecken die einen Kreis bilden. Ist die Strecke nicht möglich bekommt man eine Fehlermeldung.
 ### Zulässig:
-•	Linz-Wien
-•	Wien-St.Pölten
+-	Linz-Wien
+-	Wien-St.Pölten
 ### Nicht zulässig:
-•	Linz-Wien
-•	Wien-Linz
+-	Linz-Wien
+-	Wien-Linz
 oder
-•	Linz-Wien
-•	Salzburg-Klagenfurt
+-	Linz-Wien
+-	Salzburg-Klagenfurt
 
 Man kann der Fahrdurchführung Bordpersonal zuteilen. Ist ein zugeteiltes Bordpersonal nicht verfügbar, bekommt man eine Fehlermeldung.
 Für die Fahrdurchführung muss man einen Zug auswählen, passt die Spurweite des Zuges nicht auf die ausgewählte Strecke, befindet er sich in der Wartung oder ist er bereits für den Zeitraum einer anderen Fahrdurchführung zugeteilt, bekommt man eine Fehlermeldung. 
