@@ -4,7 +4,7 @@
 
 1. Klonen des Repositories oder Download des Codes via ZIP-Ordner
 
-2. Installation der Python-Packages in den jeweiligen requirements.txt Files und lesen der Anleitung im README.md.
+2. Installation der Python-Packages in den jeweiligen requirements.txt Files(Flottensystem und Ticketsystem) und lesen der Anleitungen der einzelnen Anwendungen.
 
 3. Start der jeweiligen Teilanwendung:
 - Flotten-Informationssystem: Öffnen von main.py im Source-Ordner „flotten“ und Ausführen der Datei mittels „Run-Pfeil“ in PyCharm (läuft auf Port 5002)
