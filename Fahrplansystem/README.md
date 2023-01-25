@@ -45,4 +45,3 @@ Um einen neuen Account zu erstellen muss man eine Email Adresse, Username und Pa
 In der Registerkarte „Benutzerkonten verwalten“ kann ein Admin alle Nutzer einsehen und auch Löschen.
 12.	Logout 
 Über „Logout“ kann man sich wieder abmelden. 
-
