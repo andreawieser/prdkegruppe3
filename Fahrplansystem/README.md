@@ -23,6 +23,11 @@ Nach dem Aufrufen des URLs befindet man sich auf der Login Seite. Man kann entwe
 Email: admin@admin.at
 Passwort: adminadmin
 
+Vorerstelltes Bordpersonal Bsp.
+Email: bord@personal1.at
+Passwort: bordpersonal
+(jedes vorerstellte Bordpersonal hat das Passwort "bordpersonal", bei der Email ändert sich lediglich die Nummerierung)
+
 ## 6.	Arten von Usern
 Es gibt 2 Arten von Usern: Admins und Bordpersonal. Das Bordpersonal hat Zugriff auf alle Fahrtdurchführungen und eine Liste aller Fahrdurchführungen denen sie zugeteilt sind. Admins haben zusätzlich die Möglichkeit neue Fahrdurchführungen zu erstellen, neue Accounts zu erstellen, die Benutzerkonten zu verwalten, sowie Fahrdurchführungen zu bearbeiten und zu löschen.
 
