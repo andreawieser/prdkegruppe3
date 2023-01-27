@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}Accounts verwalten{% endblock %} {% block content
+    %}
+    <link rl="stylesheet" href="/static/stylesl.css"/>   
+    <h1 align="center">
+      <br/>
+      {% block header %}Benutzerkonten{% endblock %}</h1>
+      <link rl="stylesheet" href="/static/stylesl.css"/>
+    
+    <div id="users">
+      <br/>
+      <div class="card border-light" align="center">
+      <table class = "table table-hover">
+        <thread>
+          <tr class="table" style="background-color:rgb(162, 188, 149)">
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Benutzername</th>
+            <th scope="col">Admin</th>
+            <th scope="col"></th>
+          </tr>
+        </thread>  
+      
+        {% for u in users %}
+            <tbody>
+              <tr class="table" style="background-color:rgb(219, 243, 208)">
+                <td>{{u.id}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.admin}}</td>
+                {% if user.get_admin() == 'True' %}
+                    <td><a href="/delete-user/{{u.id}}" style="color: rgb(112, 3, 3)">Löschen</a></td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                
+                  
+              </tr>
+            </tbody>
+        {% endfor %}
+        
+      </table>
+    </div>
+    {% block footer %}
+    <div align="center">
+    </div>
+    {% endblock %} {% endblock %}
+    

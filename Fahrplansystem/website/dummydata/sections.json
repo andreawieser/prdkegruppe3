@@ -1,0 +1,84 @@
+{
+  "sections": [
+    {
+      "distance": 100,
+      "endStation": 1,
+      "fee": 50.0,
+      "id": 1,
+      "maxSpeed": 150,
+      "name": "Linz - Wien",
+      "routes": [],
+      "startStation": 2
+    },
+    {
+      "distance": 100,
+      "endStation": 2,
+      "fee": 50.0,
+      "id": 2,
+      "maxSpeed": 150,
+      "name": "Wien - Linz",
+      "routes": [],
+      "startStation": 1
+    },
+    {
+      "distance": 100,
+      "endStation": 4,
+      "fee": 50.0,
+      "id": 3,
+      "maxSpeed": 150,
+      "name": "Linz - Salzburg",
+      "routes": [],
+      "startStation": 2
+    },
+    {
+      "distance": 100,
+      "endStation": 2,
+      "fee": 50.0,
+      "id": 4,
+      "maxSpeed": 150,
+      "name": "Salzburg - Linz",
+      "routes": [],
+      "startStation": 4
+    },
+    {
+      "distance": 100,
+      "endStation": 5,
+      "fee": 50.0,
+      "id": 5,
+      "maxSpeed": 150,
+      "name": "Salzburg - Klagenfurt",
+      "routes": [],
+      "startStation": 4
+    },
+    {
+      "distance": 100,
+      "endStation": 4,
+      "fee": 50.0,
+      "id": 6,
+      "maxSpeed": 150,
+      "name": "Klagenfurt - Salzburg",
+      "routes": [],
+      "startStation": 5
+    },
+    {
+      "distance": 100,
+      "endStation": 3,
+      "fee": 50.0,
+      "id": 7,
+      "maxSpeed": 150,
+      "name": "Wien - St.Poelten",
+      "routes": [],
+      "startStation": 1
+    },
+    {
+      "distance": 100,
+      "endStation": 1,
+      "fee": 50.0,
+      "id": 8,
+      "maxSpeed": 150,
+      "name": "St.Poelten - Wien",
+      "routes": [],
+      "startStation": 3
+    }
+  ]
+}
